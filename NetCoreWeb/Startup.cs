@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using NetCoreWeb.Models.SportsStore;
+using Microsoft.EntityFrameworkCore;
 
 namespace NetCoreWeb
 {
@@ -27,6 +29,12 @@ namespace NetCoreWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<ApplicationDbContext>(options => 
+            options.UseSqlServer(Configuration["Data:SportStoreProducts:ConnectionString"])); services.AddTransient<IProductRepository, EFProductRepository>();
+            //
+            //services.AddTransient<IProductRepository, FakeProductRepository>();
+            services.AddTransient<IProductRepository, EFProductRepository>();
+
             // Add framework services.
             services.AddMvc();
         }
@@ -55,6 +63,7 @@ namespace NetCoreWeb
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+            SeedData.EnsurePopulated(app);
         }
     }
 
