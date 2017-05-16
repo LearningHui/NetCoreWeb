@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using NetCoreWeb.Models.SportsStore;
+using NetCoreWeb.Models.SportsStore.ViewModels;
 
 namespace NetCoreWeb.Controllers.SportsStore
 {
@@ -16,9 +17,14 @@ namespace NetCoreWeb.Controllers.SportsStore
         }
         public int PageSize = 4;
         public ViewResult List(int page = 1) => 
-            View(repository.Products
-                .OrderBy(p => p.ProductID)
-                .Skip((page - 1) * PageSize)
-                .Take(PageSize));
+            View(new ProductsListViewModel
+            {
+                Products = repository.Products.OrderBy(p => p.ProductID).Skip((page - 1) * PageSize).Take(PageSize),
+                PagingInfo = new PagingInfo {
+                    CurrentPage = page,
+                    ItemsPerPage = PageSize,
+                    TotalItems = repository.Products.Count()
+                }
+            });
     }
 }
