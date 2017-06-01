@@ -58,6 +58,7 @@ namespace NetCoreWeb
             }
 
             app.UseStaticFiles();
+            app.UseSession();
 
             app.UseMvc(routes =>
             {
