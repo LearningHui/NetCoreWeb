@@ -15,14 +15,14 @@ namespace NetCoreWeb.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = "关于本网站的说明";
 
             return View();
         }
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
+            ViewData["Message"] = "辉哥的联系方式";
 
             return View();
         }
