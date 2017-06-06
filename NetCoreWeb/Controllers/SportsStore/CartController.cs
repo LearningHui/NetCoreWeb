@@ -47,7 +47,8 @@ namespace NetCoreWeb.Controllers.SportsStore
         }
         private Cart GetCart()
         {
-            Cart cart = HttpContext.Session.GetJson<Cart>("Cart") ?? new Cart(); return cart;
+            Cart cart = HttpContext.Session.GetJson<Cart>("Cart") ?? new Cart();
+            return cart;
         }
         private void SaveCart(Cart cart)
         {

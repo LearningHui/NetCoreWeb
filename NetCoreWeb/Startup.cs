@@ -30,12 +30,12 @@ namespace NetCoreWeb
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options => 
-            options.UseSqlServer(Configuration["Data:SportStoreProducts:ConnectionString"])); services.AddTransient<IProductRepository, EFProductRepository>();
-            //
+            options.UseSqlServer(Configuration["Data:SportStoreProducts:ConnectionString"]));
+            //services.AddTransient<IProductRepository, EFProductRepository>();
             //services.AddTransient<IProductRepository, FakeProductRepository>();
             services.AddTransient<IProductRepository, EFProductRepository>();
 
-            // Add framework services.
+            //Add framework services.
             services.AddMvc();
             services.AddMemoryCache();
             services.AddSession();
