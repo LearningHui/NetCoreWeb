@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NetCoreWeb.Models.SportsStore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
 namespace NetCoreWeb
 {
@@ -31,10 +32,10 @@ namespace NetCoreWeb
         {
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(Configuration["Data:SportStoreProducts:ConnectionString"]));
-            //services.AddTransient<IProductRepository, EFProductRepository>();
             //services.AddTransient<IProductRepository, FakeProductRepository>();
             services.AddTransient<IProductRepository, EFProductRepository>();
-
+            services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             //Add framework services.
             services.AddMvc();
             services.AddMemoryCache();
