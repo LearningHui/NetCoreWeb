@@ -10,6 +10,8 @@ using Microsoft.Extensions.Logging;
 using NetCoreWeb.Models.SportsStore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
+using NetCoreWeb.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace NetCoreWeb
 {
@@ -33,6 +35,8 @@ namespace NetCoreWeb
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(Configuration["Data:SportStoreProducts:ConnectionString"]));
             //services.AddTransient<IProductRepository, FakeProductRepository>();
+            services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(Configuration["Data:SportStoreIdentity:ConnectionString"]));
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>();
             services.AddTransient<IProductRepository, EFProductRepository>();
             services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -61,7 +65,7 @@ namespace NetCoreWeb
 
             app.UseStaticFiles();
             app.UseSession();
-
+            app.UseIdentity();
             app.UseMvc(routes =>
             {
                 if (env.IsDevelopment())
@@ -78,6 +82,7 @@ namespace NetCoreWeb
             {
                 SeedData.EnsurePopulated(app);
             }
+            IdentitySeedData.EnsurePopulated(app);
         }
     }
 
