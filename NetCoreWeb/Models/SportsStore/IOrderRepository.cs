@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace NetCoreWeb.Models.SportsStore
 {
-    public interface IProductRepository
+    public interface IOrderRepository
     {
-        IEnumerable<Product> Products { get; }
-        void SaveProduct(Product product);
+        IEnumerable<Order> Orders { get; }
+        void SaveOrder(Order order);
     }
 }

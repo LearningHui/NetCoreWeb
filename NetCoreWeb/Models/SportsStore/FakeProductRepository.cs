@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace NetCoreWeb.Models.SportsStore
 {
-    public class FakeProductRepository : IProductRepository
+    public class FakeProductRepository /*: IProductRepository*/
     {
         public IEnumerable<Product> Products => new List<Product> {
             new Product { Name = "Football", Price = 25 },
