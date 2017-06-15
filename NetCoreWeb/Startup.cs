@@ -26,7 +26,7 @@ namespace NetCoreWeb
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
-            appName = AppName.SportsStroe;
+            appName = AppName.UperHui;
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -89,7 +89,6 @@ namespace NetCoreWeb
                     routes.MapRoute(name: null, template: "{category}", defaults: new { controller = "Product", action = "List", page = 1 });
                     routes.MapRoute(name: null, template: "", defaults: new { controller = "Product", action = "List", page = 1 });
                     routes.MapRoute(name: null, template: "{controller}/{action}/{id?}");
-                    routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
                 }    
                 else
                 {
