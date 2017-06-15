@@ -17,6 +17,7 @@ namespace NetCoreWeb
 {
     public class Startup
     {
+        private readonly AppName appName;
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -25,6 +26,7 @@ namespace NetCoreWeb
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
+            appName = AppName.SportsStroe;
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -32,19 +34,31 @@ namespace NetCoreWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(Configuration["Data:SportStoreProducts:ConnectionString"]));
-            //services.AddTransient<IProductRepository, FakeProductRepository>();
-            services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(Configuration["Data:SportStoreIdentity:ConnectionString"]));
-            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>();
-            services.AddTransient<IProductRepository, EFProductRepository>();
-            services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddTransient<IOrderRepository, EFOrderRepository>();
-            //Add framework services.
-            services.AddMvc();
-            services.AddMemoryCache();
-            services.AddSession();
+            if (appName == AppName.SportsStroe)
+            {
+                services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration["Data:SportStoreProducts:ConnectionString"]));
+                //services.AddTransient<IProductRepository, FakeProductRepository>();
+                services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(Configuration["Data:Identity:ConnectionString"]));
+                services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>();
+                services.AddTransient<IProductRepository, EFProductRepository>();
+                services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+                services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+                services.AddTransient<IOrderRepository, EFOrderRepository>();
+                //Add framework services.
+                services.AddMvc();
+                services.AddMemoryCache();
+                services.AddSession();
+            }
+            else if(appName == AppName.UperHui)
+            {
+                services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(Configuration["Data:Identity:ConnectionString"]));
+                services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>();
+                services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+                //Add framework services.
+                services.AddMvc();
+                services.AddMemoryCache();
+                services.AddSession();
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,22 +82,34 @@ namespace NetCoreWeb
             app.UseIdentity();
             app.UseMvc(routes =>
             {
-                if (env.IsDevelopment())
+                if (appName == AppName.SportsStroe)
                 {
                     routes.MapRoute(name: null, template: "{category}/Page{page:int}", defaults: new { controller = "Product", action = "List" });
                     routes.MapRoute(name: null, template: "Page{page:int}", defaults: new { controller = "Product", action = "List", page = 1 });
                     routes.MapRoute(name: null, template: "{category}", defaults: new { controller = "Product", action = "List", page = 1 });
                     routes.MapRoute(name: null, template: "", defaults: new { controller = "Product", action = "List", page = 1 });
                     routes.MapRoute(name: null, template: "{controller}/{action}/{id?}");
-                }                    
-                routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
+                    routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
+                }    
+                else
+                {
+                    routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
+                }
             });
-            if (env.IsDevelopment())
+            if (appName == AppName.SportsStroe)
             {
                 SeedData.EnsurePopulated(app);
             }
             IdentitySeedData.EnsurePopulated(app);
         }
+    }
+
+    //"SPORTS_STROE" -- the app used for test
+    //"SUPER_HUI"-- my personal website
+    public enum AppName
+    {
+        SportsStroe,
+        UperHui
     }
 
 }
