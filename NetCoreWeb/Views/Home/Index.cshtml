@@ -15,7 +15,7 @@
             <div class="carousel-caption" role="option">
                 <p>Welcome to the space of super hui !</p>
                 <p>You'll find a different me here.</p>
-                <p><a class="btn btn-default" href="">Click me!</a></p>
+                <p><a class="btn btn-default" asp-action="Create" asp-controller="Comment">Click me!</a></p>
             </div>
         </div>
         <div class="item">
@@ -23,7 +23,7 @@
             <div class="carousel-caption" role="option">
                 <p>站点建设中，会陆续会陆续放出更多功能及模块</p>
                 <p>（进度完全取决于本人业余时间...）</p>
-                <p><a class="btn btn-default" href="">期待更多？不妨先来杯茶，稍等下</a>
+                <p><a class="btn btn-default" asp-action="Create" asp-controller="Comment">期待更多？不妨先来杯茶，稍等下</a>
                 </p>
             </div>
         </div>
@@ -32,7 +32,7 @@
             <div class="carousel-caption" role="option">
                 <p>征集你们的意见，计划以后放出一个交互模块供大家交流，</p>
                 <p>比如一个Blogger</p>
-                <p><a class="btn btn-default" href="">给出你的意见吧！</a></p>
+                <p><a class="btn btn-default" asp-action="Create" asp-controller="Comment">给出你的意见吧！</a></p>
             </div>
         </div>
         <div class="item">
@@ -42,7 +42,7 @@
                     一个影集展示模块似乎必不可少的，以供朋友们分享                    
                 </p>
                 <p>
-                    <a class="btn btn-default" href="">
+                    <a class="btn btn-default" asp-action="Create" asp-controller="Comment">
                         稍安勿躁,应该不会等太久
                     </a>
                 </p>
@@ -57,6 +57,15 @@
         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
     </a>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <h2>留言</h2>
+        <ul>
+            <li>此处你有什么想对我说的？</li>
+            <li><a asp-action="Create" asp-controller="Comment">戳我</a> Give me some comments!</li>
+        </ul>
+    </div>
 </div>
 
 @*<div class="row">

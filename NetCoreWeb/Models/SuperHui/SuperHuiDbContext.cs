@@ -1,0 +1,14 @@
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace NetCoreWeb.Models.SuperHui
+{
+    public class SuperHuiDbContext : DbContext
+    {
+        public SuperHuiDbContext(DbContextOptions<SuperHuiDbContext> options) : base(options) { }
+        public DbSet<Comment> Comments { get; set; }
+    }
+}

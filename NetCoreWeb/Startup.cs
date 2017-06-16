@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using NetCoreWeb.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using NetCoreWeb.Models.SuperHui;
 
 namespace NetCoreWeb
 {
@@ -51,7 +52,9 @@ namespace NetCoreWeb
             }
             else if(appName == AppName.UperHui)
             {
+                services.AddDbContext<SuperHuiDbContext>(options => options.UseSqlServer(Configuration["Data:SuperHui:ConnectionString"]));
                 services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(Configuration["Data:Identity:ConnectionString"]));
+                services.AddTransient<ICommentRepository, EFCommentRepository>();
                 services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>();
                 services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
                 //Add framework services.
