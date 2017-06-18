@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using NetCoreWeb.Models.SportsStore;
 using NetCoreWeb.Models.SportsStore.ViewModels;
+using NetCoreWeb.Models.ViewModels;
 
 namespace NetCoreWeb.Controllers.SportsStore
 {

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
-using NetCoreWeb.Models.SportsStore.ViewModels;
+using NetCoreWeb.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

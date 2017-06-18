@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 using Moq;
 using NetCoreWeb.Infrastructure;
 using NetCoreWeb.Models.SportsStore.ViewModels;
+using NetCoreWeb.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;

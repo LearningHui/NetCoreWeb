@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace NetCoreWeb.Models.SuperHui.ViewModels
+namespace NetCoreWeb.Models.ViewModels
 {
     public class PagingInfo
     {

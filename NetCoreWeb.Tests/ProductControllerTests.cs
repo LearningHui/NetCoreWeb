@@ -8,6 +8,7 @@ using System.Text;
 using Xunit;
 using NetCoreWeb.Models.SportsStore.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using NetCoreWeb.Models.ViewModels;
 
 namespace NetCoreWeb.Tests
 {

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using NetCoreWeb.Models.SuperHui;
 using NetCoreWeb.Models.SuperHui.ViewModels;
+using NetCoreWeb.Models.ViewModels;
 
 namespace NetCoreWeb.Controllers.SuperHui
 {
