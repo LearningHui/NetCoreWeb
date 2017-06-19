@@ -77,7 +77,7 @@ namespace NetCoreWeb
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Error");
             }
 
             app.UseStaticFiles();
@@ -85,6 +85,7 @@ namespace NetCoreWeb
             app.UseIdentity();
             app.UseMvc(routes =>
             {
+                routes.MapRoute(name: "Error", template: "Error", defaults: new { controller = "Error", action = "Error" });
                 if (appName == AppName.SportsStroe)
                 {
                     routes.MapRoute(name: null, template: "{category}/Page{page:int}", defaults: new { controller = "Product", action = "List" });

@@ -30,6 +30,7 @@
     <Folder Include="Views\Account\" />
     <Folder Include="Views\Shared\Components\CartSummary\" />
     <Folder Include="Views\Admin\" />
+    <Folder Include="Views\Error\" />
   </ItemGroup>
 
 </Project>
