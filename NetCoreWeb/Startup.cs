@@ -13,6 +13,8 @@ using Microsoft.AspNetCore.Http;
 using NetCoreWeb.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using NetCoreWeb.Models.SuperHui;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace NetCoreWeb
 {
@@ -61,6 +63,15 @@ namespace NetCoreWeb
                 services.AddMvc();
                 services.AddMemoryCache();
                 services.AddSession();
+
+                #region CORS
+                services.AddCors(options =>
+                {
+                    options.AddPolicy("AllowSpecificOrigin",
+                    builder => builder.WithOrigins("http://localhost:52095").AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
+                 });
+                #endregion
+
             }
         }
 
@@ -81,6 +92,11 @@ namespace NetCoreWeb
             }
 
             app.UseStaticFiles();
+            //app.UseStaticFiles(new StaticFileOptions()
+            //{
+            //    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot/Files")),
+            //    RequestPath = new PathString("/src")
+            //});
             app.UseSession();
             app.UseIdentity();
             app.UseMvc(routes =>
@@ -99,6 +115,8 @@ namespace NetCoreWeb
                     routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
                 }
             });
+            // Shows UseCors with named policy.
+            app.UseCors("AllowSpecificOrigin");            
             if (appName == AppName.SportsStroe)
             {
                 SeedData.EnsurePopulated(app);
