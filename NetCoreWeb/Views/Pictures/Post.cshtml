@@ -21,21 +21,20 @@
                 }
                 $.ajax({
                     type: "POST",
-                    url: appDomain + 'api/Pictures',
+                    url: appDomain + 'pictures/post',
                     contentType: false,
                     processData: false,
                     data: data,
                     success: function (data) {
+                        alert("upload success!");
                         console.log(JSON.stringify(data));
                     },
                     error: function () {
+                        alert("upload error!");
                         console.log(JSON.stringify(data));
                     }
                 });
             });
-            //end click
-
-
         })
     </script>
 </head>
@@ -48,7 +47,7 @@
         </header>
         <div>
             <form id="uploadForm" enctype="multipart/form-data">
-                <input type="file" id="files" name="files" placeholder="file" multiple>file-multiple属性可以选择多项<br><br>
+                <input type="file" id="files" name="files" placeholder="file" multiple><br><br>
                 <input type="button" id="btn_fileUpload" value="fileUpload">
             </form>
         </div>

@@ -68,11 +68,32 @@ namespace NetCoreWeb
                 services.AddCors(options =>
                 {
                     options.AddPolicy("AllowSpecificOrigin",
-                    builder => builder.WithOrigins("http://localhost:52095").AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
+                    builder => builder.WithOrigins("http://www.zoupenghui.com").AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
                  });
                 #endregion
 
             }
+        }
+        //used in develpment envirenment
+        public void ConfigureDevelopmentServices(IServiceCollection services)
+        {
+            services.AddDbContext<SuperHuiDbContext>(options => options.UseSqlServer(Configuration["Data:SuperHui:ConnectionString"]));
+            services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(Configuration["Data:Identity:ConnectionString"]));
+            services.AddTransient<ICommentRepository, EFCommentRepository>();
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            //Add framework services.
+            services.AddMvc();
+            services.AddMemoryCache();
+            services.AddSession();
+
+            #region CORS
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigin",
+                builder => builder.WithOrigins("http://localhost:52095").AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
+            });
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -88,7 +109,7 @@ namespace NetCoreWeb
             }
             else
             {
-                app.UseExceptionHandler("/Error");
+                app.UseExceptionHandler("/Error/Error");
             }
 
             app.UseStaticFiles();
@@ -117,6 +138,46 @@ namespace NetCoreWeb
             });
             // Shows UseCors with named policy.
             app.UseCors("AllowSpecificOrigin");            
+            if (appName == AppName.SportsStroe)
+            {
+                SeedData.EnsurePopulated(app);
+            }
+            IdentitySeedData.EnsurePopulated(app);
+        }
+        //used in develpment envirenment
+        public void ConfigureDevelopment(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        {
+            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            loggerFactory.AddDebug();
+            app.UseDeveloperExceptionPage();
+            app.UseBrowserLink();
+
+            app.UseStaticFiles();
+            //app.UseStaticFiles(new StaticFileOptions()
+            //{
+            //    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot/Files")),
+            //    RequestPath = new PathString("/src")
+            //});
+            app.UseSession();
+            app.UseIdentity();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(name: "Error", template: "Error", defaults: new { controller = "Error", action = "Error" });
+                if (appName == AppName.SportsStroe)
+                {
+                    routes.MapRoute(name: null, template: "{category}/Page{page:int}", defaults: new { controller = "Product", action = "List" });
+                    routes.MapRoute(name: null, template: "Page{page:int}", defaults: new { controller = "Product", action = "List", page = 1 });
+                    routes.MapRoute(name: null, template: "{category}", defaults: new { controller = "Product", action = "List", page = 1 });
+                    routes.MapRoute(name: null, template: "", defaults: new { controller = "Product", action = "List", page = 1 });
+                    routes.MapRoute(name: null, template: "{controller}/{action}/{id?}");
+                }
+                else
+                {
+                    routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
+                }
+            });
+            // Shows UseCors with named policy.
+            app.UseCors("AllowSpecificOrigin");
             if (appName == AppName.SportsStroe)
             {
                 SeedData.EnsurePopulated(app);

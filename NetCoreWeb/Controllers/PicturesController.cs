@@ -11,8 +11,6 @@ using NetCoreWeb.Infrastructure;
 
 namespace NetCoreWeb.Controllers
 {
-    //[Produces("application/json")]
-    [Route("api/[controller]")]
     [EnableCors("AllowSpecificOrigin")]
     public class PicturesController : Controller
     {

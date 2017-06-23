@@ -26,5 +26,9 @@ namespace NetCoreWeb.Controllers
 
             return View();
         }
+        public ViewResult Error()
+        {
+            return View();
+        }
     }
 }
