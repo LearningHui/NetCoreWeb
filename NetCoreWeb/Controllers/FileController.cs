@@ -65,7 +65,7 @@ namespace NetCoreWeb.Controllers
                 }
                 size += file.Length;
             }
-            TempData["message"] = $"{files.Count} picture(s) / { size}bytes uploaded successfully!";
+            TempData["message"] = $"{files.Count} picture(s) / { FileCapability(size)} uploaded successfully!";
             return View();
         }
         [HttpPost]
@@ -95,8 +95,21 @@ namespace NetCoreWeb.Controllers
                 }
                 size += file.Length;
             }
-            TempData["message"] = $"{files.Count} file(s) / { size}bytes uploaded successfully!";
+            //TempData["message"] = $"{files.Count} file(s) / { size}bytes uploaded successfully!";
+            TempData["message"] = $"{files.Count} file(s) / { FileCapability(size)} uploaded successfully!";
+
             return View();
+        }
+        //get file capability
+        private string FileCapability(long bytes)
+        {
+            long KB = bytes / 1024;
+            if (KB < 1024)
+                return KB.ToString() + "KB";
+            else if (KB >= 1024 && KB < 1024 * 1024)
+                return (KB / 1024).ToString() + "MB";
+            else
+                return (KB / (1024*1024)).ToString() + "GB";
         }
     }
 }

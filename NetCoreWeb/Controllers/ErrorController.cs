@@ -11,6 +11,7 @@ namespace NetCoreWeb.Controllers
         public ViewResult Error()
         {
             return View();
+            //RouteData
         }
     }
 }
