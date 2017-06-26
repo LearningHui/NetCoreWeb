@@ -8,6 +8,7 @@ using Microsoft.Net.Http.Headers;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using NetCoreWeb.Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NetCoreWeb.Controllers
 {
@@ -48,14 +49,15 @@ namespace NetCoreWeb.Controllers
                     Directory.CreateDirectory(filePath);
                 }
 
-                string suffix = fileName.Split('.')[1];
-
+                //string suffix = fileName.Split('.')[1];
+                string suffix = fileName.Substring(fileName.LastIndexOf(".") + 1, (fileName.Length - fileName.LastIndexOf(".") - 1));
                 if (!pictureFormatArray.Contains(suffix))
                 {
                     return Json(Return_Helper_DG.Error_Msg_Ecode_Elevel_HttpCode("the picture format not support ! you must upload files that suffix like 'png','jpg','jpeg','bmp','gif','ico'."));
                 }
 
                 fileName = Guid.NewGuid() + "." + suffix;
+
 
                 string fileFullName = filePath + fileName;
 

@@ -1,18 +1,16 @@
-
 @{
-    ViewData["Title"] = "UploadPictures";
+    ViewData["Title"] = "UploadFiles";
 }
 
-<h2>UploadPictures</h2>
+<h2>UploadFiles</h2>
 @if (TempData["message"] != null)
 {
     <div class="alert alert-success">@TempData["message"]</div>
 }
-<form asp-action="UploadPictures"
+<form asp-action="UploadFiles"
       asp-controller="File"
       method="post"
       enctype="multipart/form-data">
     <input type="file" name="files" class="file" style="margin:0px 0px 10px 0px" multiple />
-    <input type="submit" class="btn btn-primary" value="Upload Selected Pictures" />
+    <input type="submit" class="btn btn-primary" value="Upload Selected Files" />
 </form>
-
