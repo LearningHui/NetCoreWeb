@@ -57,6 +57,7 @@ namespace NetCoreWeb
                 services.AddDbContext<SuperHuiDbContext>(options => options.UseSqlServer(Configuration["Data:SuperHui:ConnectionString"]));
                 services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(Configuration["Data:Identity:ConnectionString"]));
                 services.AddTransient<ICommentRepository, EFCommentRepository>();
+                services.AddTransient<IDishRepository, EFDishRepository>();
                 services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>();
                 services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
                 //Add framework services.
@@ -80,6 +81,7 @@ namespace NetCoreWeb
             services.AddDbContext<SuperHuiDbContext>(options => options.UseSqlServer(Configuration["Data:SuperHui:ConnectionString"]));
             services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(Configuration["Data:Identity:ConnectionString"]));
             services.AddTransient<ICommentRepository, EFCommentRepository>();
+            services.AddTransient<IDishRepository, EFDishRepository>();
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             //Add framework services.
