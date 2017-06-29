@@ -16,5 +16,9 @@ namespace NetCoreWeb.Controllers
         {
             return View();
         }
+        public IActionResult Order()
+        {
+            return View();
+        }
     }
 }
