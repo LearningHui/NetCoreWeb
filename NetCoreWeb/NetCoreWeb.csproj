@@ -41,7 +41,7 @@
     <Folder Include="Views\Error\" />
     <Folder Include="Views\Pictures\" />
     <Folder Include="Views\File\" />
-    <Folder Include="Views\Menu\" />
+    <Folder Include="Views\Dish\" />
     <Folder Include="wwwroot\files\pictures\" />
   </ItemGroup>
 

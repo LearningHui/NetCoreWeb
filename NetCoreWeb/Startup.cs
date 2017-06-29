@@ -58,6 +58,7 @@ namespace NetCoreWeb
                 services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(Configuration["Data:Identity:ConnectionString"]));
                 services.AddTransient<ICommentRepository, EFCommentRepository>();
                 services.AddTransient<IDishRepository, EFDishRepository>();
+                services.AddScoped<Menu>(sp => SessionMenu.GetMenu(sp));
                 services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>();
                 services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
                 //Add framework services.
@@ -82,6 +83,7 @@ namespace NetCoreWeb
             services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(Configuration["Data:Identity:ConnectionString"]));
             services.AddTransient<ICommentRepository, EFCommentRepository>();
             services.AddTransient<IDishRepository, EFDishRepository>();
+            services.AddScoped<Menu>(sp => SessionMenu.GetMenu(sp));
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             //Add framework services.
@@ -180,10 +182,11 @@ namespace NetCoreWeb
             });
             // Shows UseCors with named policy.
             app.UseCors("AllowSpecificOrigin");
-            if (appName == AppName.SportsStroe)
-            {
-                SeedData.EnsurePopulated(app);
-            }
+            //if (appName == AppName.SportsStroe)
+            //{
+            //    SeedData.EnsurePopulated(app);
+            //}
+            SeedData.EnsurePopulated(app);
             IdentitySeedData.EnsurePopulated(app);
         }
     }

@@ -1,0 +1,18 @@
+﻿@model Dish
+<div class="well col-md-4">
+    <h3>
+        <strong>@Model.Name</strong>
+        <span class="pull-right label label-primary">
+            @Model.Price.ToString("c")
+        </span>
+    </h3>
+    <div><img src="~/Files/Pictures/7a9ede52-bb57-4968-9539-3c0019dd2fdb.jpg" class="img-responsive" /></div>
+    <form id="@Model.DishID" asp-action="AddToMenu" asp-controller="Menu" method="post">
+        <input type="hidden" asp-for="DishID" />
+        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />        
+        <span class="lead">
+            @Model.Description
+            <button type="submit" class="btn btn-success btn-sm pull-right">Add To Menu</button>
+        </span>
+    </form>
+</div> 
