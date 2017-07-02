@@ -54,6 +54,53 @@ namespace NetCoreWeb.Migrations.SuperHuiDb
 
                     b.ToTable("Dishes");
                 });
+
+            modelBuilder.Entity("NetCoreWeb.Models.SuperHui.MenuLine", b =>
+                {
+                    b.Property<int>("MenuLineID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("DishID");
+
+                    b.Property<int?>("OrderID");
+
+                    b.Property<int>("Quantity");
+
+                    b.HasKey("MenuLineID");
+
+                    b.HasIndex("DishID");
+
+                    b.HasIndex("OrderID");
+
+                    b.ToTable("MenuLine");
+                });
+
+            modelBuilder.Entity("NetCoreWeb.Models.SuperHui.Order", b =>
+                {
+                    b.Property<int>("OrderID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Mobile")
+                        .IsRequired();
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.HasKey("OrderID");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("NetCoreWeb.Models.SuperHui.MenuLine", b =>
+                {
+                    b.HasOne("NetCoreWeb.Models.SuperHui.Dish", "Dish")
+                        .WithMany()
+                        .HasForeignKey("DishID");
+
+                    b.HasOne("NetCoreWeb.Models.SuperHui.Order")
+                        .WithMany("Lines")
+                        .HasForeignKey("OrderID");
+                });
         }
     }
 }

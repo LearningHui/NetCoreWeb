@@ -27,11 +27,11 @@ namespace NetCoreWeb.Models.SportsStore
             if (!SuperHuiContext.Dishes.Any())
             {
                 SuperHuiContext.Dishes.AddRange(
-                    new Dish { Name = "酱焖嘎鱼", Description = "肉质鲜嫩", Category = "鱼&生鲜", Price = 0, ImageSrc = "~/Files/Pictures/7a9ede52-bb57-4968-9539-3c0019dd2fdb.jpg" },
-                    new Dish { Name = "糖醋鱼", Description = "武昌鱼、罗菲鱼", Category = "鱼&生鲜", Price = 0, ImageSrc = "~/Files/Pictures/7a9ede52-bb57-4968-9539-3c0019dd2fdb.jpg" },
-                    new Dish { Name = "小葱拌豆腐", Description = "", Category = "凉菜", Price = 0, ImageSrc = "~/Files/Pictures/7a9ede52-bb57-4968-9539-3c0019dd2fdb.jpg" },
-                    new Dish { Name = "菠菜花生", Description = "", Category = "凉菜", Price = 0, ImageSrc = "~/Files/Pictures/7a9ede52-bb57-4968-9539-3c0019dd2fdb.jpg" },
-                    new Dish { Name = "拍黄瓜", Description = "", Category = "凉菜", Price = 0, ImageSrc = "~/Files/Pictures/7a9ede52-bb57-4968-9539-3c0019dd2fdb.jpg" }
+                    new Dish { Name = "酱焖嘎鱼", Description = "肉质鲜嫩", Category = "鱼&生鲜", Price = 0, ImageSrc = "/Files/Pictures/gayu.jpg" },
+                    new Dish { Name = "糖醋鱼", Description = "武昌鱼、罗菲鱼", Category = "鱼&生鲜", Price = 0, ImageSrc = "/Files/Pictures/suantaichaorou.jpg" },
+                    new Dish { Name = "小葱拌豆腐", Description = "", Category = "凉菜", Price = 0, ImageSrc = "/Files/Pictures/hds.jpg" },
+                    new Dish { Name = "菠菜花生", Description = "", Category = "凉菜", Price = 0, ImageSrc = "/Files/Pictures/lianou.jpg" },
+                    new Dish { Name = "拍黄瓜", Description = "", Category = "凉菜", Price = 0, ImageSrc = "/Files/Pictures/hongshaorou.jpg" }
                     );
                 SuperHuiContext.SaveChanges();
             }

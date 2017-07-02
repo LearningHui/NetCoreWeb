@@ -61,6 +61,7 @@ namespace NetCoreWeb
                 services.AddScoped<Menu>(sp => SessionMenu.GetMenu(sp));
                 services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>();
                 services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+                services.AddTransient<IDishOrderRepository, EFDishOrderRepository>();
                 //Add framework services.
                 services.AddMvc();
                 services.AddMemoryCache();
@@ -86,6 +87,7 @@ namespace NetCoreWeb
             services.AddScoped<Menu>(sp => SessionMenu.GetMenu(sp));
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddTransient<IDishOrderRepository, EFDishOrderRepository>();
             //Add framework services.
             services.AddMvc();
             services.AddMemoryCache();

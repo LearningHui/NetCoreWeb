@@ -33,7 +33,7 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controllers\SuperHui\" />
+    <Folder Include="Controllers\Bus\" />
     <Folder Include="Views\Account\" />
     <Folder Include="Views\Pictures\" />
     <Folder Include="Views\Shared\Components\CartSummary\" />
@@ -42,6 +42,7 @@
     <Folder Include="Views\Pictures\" />
     <Folder Include="Views\File\" />
     <Folder Include="Views\Dish\" />
+    <Folder Include="Views\DishOrder\" />
     <Folder Include="wwwroot\files\pictures\" />
   </ItemGroup>
 
