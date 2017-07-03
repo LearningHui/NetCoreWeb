@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using NetCoreWeb.Models.SuperHui;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
+using NetCoreWeb.Models.BusTicket;
 
 namespace NetCoreWeb
 {
@@ -58,6 +59,7 @@ namespace NetCoreWeb
                 services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(Configuration["Data:Identity:ConnectionString"]));
                 services.AddTransient<ICommentRepository, EFCommentRepository>();
                 services.AddTransient<IDishRepository, EFDishRepository>();
+                services.AddTransient<ITicketRepository, EFTicketRepository>();
                 services.AddScoped<Menu>(sp => SessionMenu.GetMenu(sp));
                 services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>();
                 services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -82,8 +84,10 @@ namespace NetCoreWeb
         {
             services.AddDbContext<SuperHuiDbContext>(options => options.UseSqlServer(Configuration["Data:SuperHui:ConnectionString"]));
             services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(Configuration["Data:Identity:ConnectionString"]));
+            services.AddDbContext<BusTicketDbContext>(options => options.UseSqlServer(Configuration["Data:BusTicket:ConnectionString"]));        
             services.AddTransient<ICommentRepository, EFCommentRepository>();
             services.AddTransient<IDishRepository, EFDishRepository>();
+            services.AddTransient<ITicketRepository, EFTicketRepository>();
             services.AddScoped<Menu>(sp => SessionMenu.GetMenu(sp));
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -130,7 +134,7 @@ namespace NetCoreWeb
             {
                 routes.MapRoute(name: "Error", template: "Error", defaults: new { controller = "Error", action = "Error" });
                 if (appName == AppName.SportsStroe)
-                {
+                {                    
                     routes.MapRoute(name: null, template: "{category}/Page{page:int}", defaults: new { controller = "Product", action = "List" });
                     routes.MapRoute(name: null, template: "Page{page:int}", defaults: new { controller = "Product", action = "List", page = 1 });
                     routes.MapRoute(name: null, template: "{category}", defaults: new { controller = "Product", action = "List", page = 1 });
@@ -139,6 +143,7 @@ namespace NetCoreWeb
                 }    
                 else
                 {
+                    routes.MapRoute(name: "areas", template: "{area:exists}/{controller=Home}/{action=Index}");
                     routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
                 }
             });
@@ -170,7 +175,7 @@ namespace NetCoreWeb
             {
                 routes.MapRoute(name: "Error", template: "Error", defaults: new { controller = "Error", action = "Error" });
                 if (appName == AppName.SportsStroe)
-                {
+                {                    
                     routes.MapRoute(name: null, template: "{category}/Page{page:int}", defaults: new { controller = "Product", action = "List" });
                     routes.MapRoute(name: null, template: "Page{page:int}", defaults: new { controller = "Product", action = "List", page = 1 });
                     routes.MapRoute(name: null, template: "{category}", defaults: new { controller = "Product", action = "List", page = 1 });
@@ -179,6 +184,7 @@ namespace NetCoreWeb
                 }
                 else
                 {
+                    routes.MapRoute(name: "areas", template: "{area:exists}/{controller=Home}/{action=Index}");
                     routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
                 }
             });
