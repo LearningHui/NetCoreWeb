@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using NetCoreWeb.Models.BusTicket;
+using NetCoreWeb.Areas.Bus.Models;
 
 namespace NetCoreWeb.Migrations.BusTicketDb
 {
@@ -16,7 +16,7 @@ namespace NetCoreWeb.Migrations.BusTicketDb
                 .HasAnnotation("ProductVersion", "1.1.2")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("NetCoreWeb.Models.BusTicket.Ticket", b =>
+            modelBuilder.Entity("NetCoreWeb.Areas.Bus.Models.Ticket", b =>
                 {
                     b.Property<int>("TicketID")
                         .ValueGeneratedOnAdd();

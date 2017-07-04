@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using NetCoreWeb.Models.SuperHui;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
-using NetCoreWeb.Models.BusTicket;
+using NetCoreWeb.Areas.Bus.Models;
 
 namespace NetCoreWeb
 {
@@ -60,7 +60,8 @@ namespace NetCoreWeb
                 services.AddTransient<ICommentRepository, EFCommentRepository>();
                 services.AddTransient<IDishRepository, EFDishRepository>();
                 services.AddTransient<ITicketRepository, EFTicketRepository>();
-                services.AddScoped<Menu>(sp => SessionMenu.GetMenu(sp));
+                services.AddScoped<Menu>(m => SessionMenu.GetMenu(m));
+                services.AddScoped<TicketCart>(tc => SessionTicketCart.GetCart(tc));
                 services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>();
                 services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
                 services.AddTransient<IDishOrderRepository, EFDishOrderRepository>();
@@ -88,7 +89,8 @@ namespace NetCoreWeb
             services.AddTransient<ICommentRepository, EFCommentRepository>();
             services.AddTransient<IDishRepository, EFDishRepository>();
             services.AddTransient<ITicketRepository, EFTicketRepository>();
-            services.AddScoped<Menu>(sp => SessionMenu.GetMenu(sp));
+            services.AddScoped<Menu>(m => SessionMenu.GetMenu(m));
+            services.AddScoped<TicketCart>(tc => SessionTicketCart.GetCart(tc));
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IDishOrderRepository, EFDishOrderRepository>();

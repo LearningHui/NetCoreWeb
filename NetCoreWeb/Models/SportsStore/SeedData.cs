@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using NetCoreWeb.Models.SuperHui;
+using NetCoreWeb.Areas.Bus.Models;
 
 namespace NetCoreWeb.Models.SportsStore
 {
@@ -34,6 +35,20 @@ namespace NetCoreWeb.Models.SportsStore
                     new Dish { Name = "拍黄瓜", Description = "", Category = "凉菜", Price = 0, ImageSrc = "/Files/Pictures/hongshaorou.jpg" }
                     );
                 SuperHuiContext.SaveChanges();
+            }
+            BusTicketDbContext busTicketDbContext = app.ApplicationServices.GetRequiredService<BusTicketDbContext>();
+            if (!busTicketDbContext.Tickets.Any())
+            {
+                busTicketDbContext.Tickets.AddRange(
+                    new Ticket { StartStation="富士康",TerminalStation="平顶山服务区",Price=40,Description="备注信息",Category="富士康专线"},
+                    new Ticket { StartStation = "富士康", TerminalStation = "叶县", Price = 40, Description = "备注信息", Category = "富士康专线" },
+                    new Ticket { StartStation = "富士康", TerminalStation = "旧县", Price = 40, Description = "备注信息", Category = "富士康专线" },
+                    new Ticket { StartStation = "富士康", TerminalStation = "方城", Price = 50, Description = "备注信息", Category = "富士康专线" },
+                    new Ticket { StartStation = "富士康", TerminalStation = "石桥", Price = 50, Description = "备注信息", Category = "富士康专线" },
+                    new Ticket { StartStation = "富士康", TerminalStation = "南阳", Price = 50, Description = "备注信息", Category = "富士康专线" },
+                    new Ticket { StartStation = "富士康", TerminalStation = "镇平", Price = 60, Description = "备注信息", Category = "富士康专线" }
+                    );
+                busTicketDbContext.SaveChanges();
             }
         }
     }

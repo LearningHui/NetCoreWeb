@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using NetCoreWeb.Models.BusTicket;
+using NetCoreWeb.Areas.Bus.Models;
 
 namespace NetCoreWeb.Migrations.BusTicketDb
 {
     [DbContext(typeof(BusTicketDbContext))]
-    [Migration("20170703062553_Initial")]
+    [Migration("20170703124410_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -17,7 +17,7 @@ namespace NetCoreWeb.Migrations.BusTicketDb
                 .HasAnnotation("ProductVersion", "1.1.2")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("NetCoreWeb.Models.BusTicket.Ticket", b =>
+            modelBuilder.Entity("NetCoreWeb.Areas.Bus.Models.Ticket", b =>
                 {
                     b.Property<int>("TicketID")
                         .ValueGeneratedOnAdd();

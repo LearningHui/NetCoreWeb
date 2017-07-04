@@ -34,7 +34,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Bus\Controllers\" />
-    <Folder Include="Areas\Bus\Models\" />
     <Folder Include="Controllers\Bus\" />
     <Folder Include="Views\Account\" />
     <Folder Include="Views\Pictures\" />
