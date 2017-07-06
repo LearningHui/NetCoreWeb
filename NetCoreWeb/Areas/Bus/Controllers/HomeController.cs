@@ -15,7 +15,6 @@ namespace NetCoreWeb.Areas.Bus.Controllers
         }
         public IActionResult Index()
         {
-            SendSms.TestSms();
             return View();
         }
         public IActionResult BookTicket()

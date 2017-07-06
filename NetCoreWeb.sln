@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCoreWeb", "NetCoreWeb\Ne
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCoreWeb.Tests", "NetCoreWeb.Tests\NetCoreWeb.Tests.csproj", "{1BF8EC53-D106-4027-80C0-4F25A916781A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TlSLib", "TlSLib\TlSLib.csproj", "{4789580C-E772-4928-B428-49114C331A38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCoreWeb.ConsoleTest", "NetCoreWeb.ConsoleTest\NetCoreWeb.ConsoleTest.csproj", "{AE04C5A1-11D7-4B6A-9029-CF13402401D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{1BF8EC53-D106-4027-80C0-4F25A916781A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BF8EC53-D106-4027-80C0-4F25A916781A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BF8EC53-D106-4027-80C0-4F25A916781A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4789580C-E772-4928-B428-49114C331A38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4789580C-E772-4928-B428-49114C331A38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4789580C-E772-4928-B428-49114C331A38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4789580C-E772-4928-B428-49114C331A38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE04C5A1-11D7-4B6A-9029-CF13402401D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE04C5A1-11D7-4B6A-9029-CF13402401D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE04C5A1-11D7-4B6A-9029-CF13402401D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE04C5A1-11D7-4B6A-9029-CF13402401D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
