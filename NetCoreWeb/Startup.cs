@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using NetCoreWeb.Models.SportsStore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using NetCoreWeb.Models;
@@ -16,6 +15,7 @@ using NetCoreWeb.Models.SuperHui;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
 using NetCoreWeb.Areas.Bus.Models;
+using NetCoreWeb.Areas.SportsStore.Models;
 
 namespace NetCoreWeb
 {
@@ -65,6 +65,7 @@ namespace NetCoreWeb
                 services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>();
                 services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
                 services.AddTransient<IDishOrderRepository, EFDishOrderRepository>();
+                services.AddTransient<ITicketOrderRepository, EFTicketOrderRepository>();
                 //Add framework services.
                 services.AddMvc();
                 services.AddMemoryCache();
@@ -94,6 +95,7 @@ namespace NetCoreWeb
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IDishOrderRepository, EFDishOrderRepository>();
+            services.AddTransient<ITicketOrderRepository, EFTicketOrderRepository>();
             //Add framework services.
             services.AddMvc();
             services.AddMemoryCache();

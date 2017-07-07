@@ -8,9 +8,10 @@ using NetCoreWeb.Areas.Bus.Models;
 namespace NetCoreWeb.Migrations.BusTicketDb
 {
     [DbContext(typeof(BusTicketDbContext))]
-    partial class BusTicketDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170707024147_TicketOrder")]
+    partial class TicketOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")

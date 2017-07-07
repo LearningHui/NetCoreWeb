@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using NetCoreWeb.Models.SportsStore;
+using NetCoreWeb.Areas.SportsStore.Models;
 
 namespace NetCoreWeb.Migrations
 {

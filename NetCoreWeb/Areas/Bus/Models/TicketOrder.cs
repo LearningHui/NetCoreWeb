@@ -10,13 +10,14 @@ namespace NetCoreWeb.Areas.Bus.Models
     public class TicketOrder
     {
         [BindNever]
-        public int OrderID { get; set; }
+        public int TicketOrderID { get; set; }
         [BindNever]
         public ICollection<TicketCartLine> Lines { get; set; }
         [BindNever]
         public bool Paid { get; set; }//是否已经付款
         [Required(ErrorMessage = "请输入联系电话")]
         public string Phone { get; set; }
+        public DateTime OrderTime { get; set; }//下单时间
         public string Remarks { get; set; }//备注信息（选填）
     }
 }

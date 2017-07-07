@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 using Microsoft.AspNetCore.Routing;
 using Moq;
-using NetCoreWeb.Components;
-using NetCoreWeb.Models.SportsStore;
+using NetCoreWeb.Areas.SportsStore.Components;
+using NetCoreWeb.Areas.SportsStore.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

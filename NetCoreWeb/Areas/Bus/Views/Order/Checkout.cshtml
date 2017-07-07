@@ -1,0 +1,27 @@
+﻿@model TicketOrder
+<h2>下单结算</h2>
+<p>请输入您的联系方式及订票备注信息</p>
+<div asp-validation-summary="All" class="text-danger"></div>
+<form asp-action="Checkout" method="post">
+    <h3>个人信息:</h3>
+    <div class="form-group">
+        <label>手机号:</label>
+        <div><span asp-validation-for="Phone" class="text-danger"></span></div> 
+        <input asp-for="Phone" class="form-control" />
+    </div>
+    <h3>备注信息:</h3>
+    <div class="form-group">
+        <label>备注:</label>
+        <input asp-for="Remarks" class="form-control" />
+    </div>
+
+    @*<h3>Options</h3>
+        <div class="checkbox">
+            <label>
+                <input asp-for="GiftWrap" /> Gift wrap these items
+            </label>
+        </div>*@
+    <div class="form-group">
+        <input class="btn btn-primary" type="submit" value="提交订单" />
+    </div>   
+</form> 

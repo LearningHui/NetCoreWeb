@@ -1,14 +1,14 @@
 ﻿using Moq;
-using NetCoreWeb.Controllers.SportsStore;
-using NetCoreWeb.Models.SportsStore;
 using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
-using NetCoreWeb.Models.SportsStore.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using NetCoreWeb.Models.ViewModels;
+using NetCoreWeb.Areas.SportsStore.Models;
+using NetCoreWeb.Areas.SportsStore.Controllers;
+using NetCoreWeb.Areas.SportsStore.Models.ViewModels;
 
 namespace NetCoreWeb.Tests
 {

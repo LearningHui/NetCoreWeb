@@ -18,7 +18,7 @@ namespace NetCoreWeb.Areas.Bus.Models
         public void SaveOrder(TicketOrder order)
         {
             context.AttachRange(order.Lines.Select(l => l.Ticket));
-            if (order.OrderID == 0)
+            if (order.TicketOrderID == 0)
             {
                 context.TicketOrders.Add(order);
             }

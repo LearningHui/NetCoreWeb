@@ -33,29 +33,29 @@ namespace NetCoreWeb.Areas.Bus.Controllers
         //    return RedirectToAction(nameof(List));
         //}
 
-        //public ViewResult Checkout() => View(new TicketOrder());
-        //[HttpPost]
-        //public IActionResult Checkout(TicketOrder order)
-        //{
-        //    if (cart.Lines.Count() == 0)
-        //    {
-        //        ModelState.AddModelError("", "Sorry, your cart is empty!");
-        //    }
-        //    if (ModelState.IsValid)
-        //    {
-        //        order.Lines = cart.Lines.ToArray();
-        //        repository.SaveOrder(order);
-        //        return RedirectToAction(nameof(Completed));
-        //    }
-        //    else
-        //    {
-        //        return View(order);
-        //    }
-        //}
-        //public ViewResult Completed()
-        //{
-        //    cart.Clear();
-        //    return View();
-        //}
+        public ViewResult Checkout() => View(new TicketOrder());
+        [HttpPost]
+        public IActionResult Checkout(TicketOrder order)
+        {
+            if (cart.Lines.Count() == 0)
+            {
+                ModelState.AddModelError("", "你还没有选购车票,请先选择车票后下单！");
+            }
+            if (ModelState.IsValid)
+            {
+                order.Lines = cart.Lines.ToArray();
+                repository.SaveOrder(order);
+                return RedirectToAction(nameof(Completed));
+            }
+            else
+            {
+                return View(order);
+            }
+        }
+        public ViewResult Completed()
+        {
+            cart.Clear();
+            return View();
+        }
     }
 }

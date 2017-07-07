@@ -12,9 +12,6 @@
     <Content Include="wwwroot\css\signin.css" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Ahoo.Aliyun.Acs.Sms" Version="1.1.0" />
-    <PackageReference Include="Aliyun.Acs.Core" Version="1.0.0" />
-    <PackageReference Include="Aliyun.Acs.Ecs" Version="1.0.0" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="1.1.2" />
@@ -37,11 +34,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Bus\Controllers\" />
-    <Folder Include="Controllers\Bus\" />
-    <Folder Include="Views\Account\" />
+    <Folder Include="Areas\Bus\Views\Cart\" />
+    <Folder Include="Areas\SportsStore\Views\Account\" />
     <Folder Include="Views\Pictures\" />
-    <Folder Include="Views\Shared\Components\CartSummary\" />
-    <Folder Include="Views\Admin\" />
+    <Folder Include="Areas\SportsStore\Views\Admin\" />
     <Folder Include="Views\Error\" />
     <Folder Include="Views\Pictures\" />
     <Folder Include="Views\File\" />

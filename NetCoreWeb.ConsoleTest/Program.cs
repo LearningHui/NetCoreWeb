@@ -43,10 +43,7 @@ namespace NetCoreWeb.ConsoleTest
                 byte[] data = Encoding.UTF8.GetBytes(appSecret + nonce + curTime);
                 byte[] result;
                 SHA1 sha = SHA1.Create();
-                //SHA1 sha = new SHA1CryptoServiceProvider();
-                // This is one implementation of the abstract class SHA1.
                 result = sha.ComputeHash(data);
-
                 return getFormattedText(result);
             }
 
@@ -79,8 +76,7 @@ namespace NetCoreWeb.ConsoleTest
 
             private static String getFormattedText(byte[] bytes)
             {
-                char[] HEX_DIGITS = { '0', '1', '2', '3', '4', '5',
-            '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
+                char[] HEX_DIGITS = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
                 int len = bytes.Length;
                 StringBuilder buf = new StringBuilder(len * 2);
                 for (int j = 0; j < len; j++)
