@@ -8,8 +8,8 @@ using NetCoreWeb.Areas.Bus.Models;
 namespace NetCoreWeb.Migrations.BusTicketDb
 {
     [DbContext(typeof(BusTicketDbContext))]
-    [Migration("20170707024147_TicketOrder")]
-    partial class TicketOrder
+    [Migration("20170707120826_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

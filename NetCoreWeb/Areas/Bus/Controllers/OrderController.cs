@@ -19,21 +19,27 @@ namespace NetCoreWeb.Areas.Bus.Controllers
             cart = cartService;
         }
         //[Authorize]
-        //public ViewResult List() =>
-        //    View(repository.Orders.Where(o => !o.Shipped));
+        public ViewResult List() =>
+            //View(repository.Orders.Where(o => !o.Paid));
+            View(repository.Orders);
         //[HttpPost]
         //[Authorize]
-        //public IActionResult MarkShipped(int orderID)
-        //{
-        //    TicketOrder order = repository.Orders.FirstOrDefault(o => o.OrderID == orderID);
-        //    if (order != null)
-        //    {
-        //        order.Shipped = true; repository.SaveOrder(order);
-        //    }
-        //    return RedirectToAction(nameof(List));
-        //}
+        public IActionResult MarkPaid(int orderID)
+        {
+            TicketOrder order = repository.Orders.FirstOrDefault(o => o.TicketOrderID == orderID);
+            if (order != null)
+            {
+                order.Paid = true;
+                repository.SaveOrder(order);                
+                Utility.Sms.SendSms.SendNotice("3063716", new string[] { $"{order.Phone}"}, new string[] { "7µã15"});
+            }
+            return RedirectToAction(nameof(List));
+        }
 
-        public ViewResult Checkout() => View(new TicketOrder());
+        public ViewResult Checkout()
+        {
+            return View(new TicketOrder());
+        }
         [HttpPost]
         public IActionResult Checkout(TicketOrder order)
         {
@@ -44,6 +50,7 @@ namespace NetCoreWeb.Areas.Bus.Controllers
             if (ModelState.IsValid)
             {
                 order.Lines = cart.Lines.ToArray();
+                order.OrderTime = DateTime.Now;
                 repository.SaveOrder(order);
                 return RedirectToAction(nameof(Completed));
             }

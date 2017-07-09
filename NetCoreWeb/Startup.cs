@@ -57,6 +57,7 @@ namespace NetCoreWeb
             {
                 services.AddDbContext<SuperHuiDbContext>(options => options.UseSqlServer(Configuration["Data:SuperHui:ConnectionString"]));
                 services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(Configuration["Data:Identity:ConnectionString"]));
+                services.AddDbContext<BusTicketDbContext>(options => options.UseSqlServer(Configuration["Data:BusTicket:ConnectionString"]));
                 services.AddTransient<ICommentRepository, EFCommentRepository>();
                 services.AddTransient<IDishRepository, EFDishRepository>();
                 services.AddTransient<ITicketRepository, EFTicketRepository>();

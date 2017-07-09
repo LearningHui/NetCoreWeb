@@ -6,34 +6,34 @@
 </h3>
 
 <div class="row">
-    <div class="well col-md-4">
-        <h3>
-            <abbr title="Phone">随车手机:</abbr><strong>17630669522</strong>
+    <div class="well col-md-4 col-xs-6" >
+        <h5>
+            <abbr title="Phone">随车手机:</abbr><strong>17630669511</strong>
             @*<strong>@Model.Name</strong>*@
             <span class="pull-right label label-primary">
-                    <a class="pull-right label label-primary" asp-action="BookInfor" asp-controller="BusHome">订票</a>
+                    <a class="pull-right label label-primary" asp-action="List" asp-controller="Ticket">订票</a>
             </span>
             @*<button type="button" class="pull-right btn btn-success btn-sm pull-right">订票</button>*@
-        </h3>
+        </h5>
         <a href="#" class="thumbnail">
             <img src="~/Files/Pictures/bus1.jpg" alt="dish" />
         </a>
     </div>
-    <div class="well col-md-4">
+    <div class="well col-md-4 col-xs-6">
         @*<address>
             <abbr title="Phone">随车手机:</abbr>
             <strong>17630669511</strong>
         </address>*@
-        <h3>
+        <h5>
             <abbr title="Phone">随车手机:</abbr><strong>17630669522</strong>
             @*<strong>@Model.Name</strong>*@
             @*<span class="pull-right label label-primary">
             @Model.Price.ToString("c")
         </span>*@
             <span class="pull-right label label-primary">
-                <a class="pull-right label label-primary" asp-action="BookInfor" asp-controller="BusHome">订票</a>
+                <a class="pull-right label label-primary" asp-action="List" asp-controller="Ticket">订票</a>
             </span>
-        </h3>
+        </h5>
         <a href="#" class="thumbnail">
             <img src="~/Files/Pictures/bus2.jpg" alt="dish" />
         </a>
@@ -47,6 +47,7 @@
             <th>发车时间：</th>
             <th class="text-right">票价：</th>
             <th class="text-right">站点：</th>
+            <th class="text-right">操作：</th>
         </tr>
     </thead>
     <tbody>
@@ -59,10 +60,11 @@
             <td class="text-left">6：00</td>
             <td class="text-right">50</td>
             <td class="text-right">
-                镇坪 南阳 方城 旧县 叶县
+                富士康 平顶山服务区 叶县 旧县 方城 石桥 南阳 镇平
             </td>
             <td>
-                <form method="post">
+                <a asp-action="List" asp-controller="Ticket" class="btn btn-sm btn-primary">预定</a>
+                @*<form method="post">
                     <input type="hidden" name="ProductID"
                            value="" />
                     <input type="hidden" name="returnUrl"
@@ -70,7 +72,7 @@
                     <button type="submit" class="btn btn-sm btn-danger ">
                         预定
                     </button>
-                </form>
+                </form>*@
             </td>
         </tr>
         <tr>
@@ -78,10 +80,11 @@
             <td class="text-left">6：00</td>
             <td class="text-right">50</td>
             <td class="text-right">
-                镇坪 南阳 方城 旧县 叶县
+                富士康 平顶山服务区 叶县 旧县 方城 石桥 南阳 镇平
             </td>
             <td>
-                <form method="post">
+                <a asp-action="List" asp-controller="Ticket" class="btn btn-sm btn-primary">预定</a>
+                @*<form method="post">
                     <input type="hidden" name="ProductID"
                            value="" />
                     <input type="hidden" name="returnUrl"
@@ -89,7 +92,7 @@
                     <button type="submit" class="btn btn-sm btn-danger ">
                         预定
                     </button>
-                </form>
+                </form>*@
             </td>
         </tr>
         <tr>
@@ -97,10 +100,11 @@
             <td class="text-left">6：00</td>
             <td class="text-right">50</td>
             <td class="text-right">
-                镇坪 南阳 方城 旧县 叶县
+                富士康 平顶山服务区 叶县 旧县 方城 石桥 南阳 镇平
             </td>
             <td>
-                <form method="post">
+                <a asp-action="List" asp-controller="Ticket" class="btn btn-sm btn-primary">预定</a>
+                @*<form method="post">
                     <input type="hidden" name="ProductID"
                            value="" />
                     <input type="hidden" name="returnUrl"
@@ -108,7 +112,7 @@
                     <button type="submit" class="btn btn-sm btn-danger ">
                         预定
                     </button>
-                </form>
+                </form>*@
             </td>
         </tr>
         <tr>
@@ -116,10 +120,11 @@
             <td class="text-left">6：00</td>
             <td class="text-right">50</td>
             <td class="text-right">
-                镇坪 南阳 方城 旧县 叶县
+                富士康 平顶山服务区 叶县 旧县 方城 石桥 南阳 镇平
             </td>
             <td>
-                <form method="post">
+                <a asp-action="List" asp-controller="Ticket" class="btn btn-sm btn-primary">预定</a>
+                @*<form method="post">
                     <input type="hidden" name="ProductID"
                            value="" />
                     <input type="hidden" name="returnUrl"
@@ -127,7 +132,7 @@
                     <button type="submit" class="btn btn-sm btn-danger ">
                         预定
                     </button>
-                </form>
+                </form>*@
             </td>
         </tr>
         <tr>
@@ -135,10 +140,11 @@
             <td class="text-left">6：00</td>
             <td class="text-right">50</td>
             <td class="text-right">
-                镇坪 南阳 方城 旧县 叶县
+                富士康 平顶山服务区 叶县 旧县 方城 石桥 南阳 镇平
             </td>
             <td>
-                <form method="post">
+                <a asp-action="List" asp-controller="Ticket" class="btn btn-sm btn-primary">预定</a>
+                @*<form method="post">
                     <input type="hidden" name="ProductID"
                            value="" />
                     <input type="hidden" name="returnUrl"
@@ -146,7 +152,7 @@
                     <button type="submit" class="btn btn-sm btn-danger ">
                         预定
                     </button>
-                </form>
+                </form>*@
             </td>
         </tr>
         <tr>
@@ -154,10 +160,11 @@
             <td class="text-left">6：00</td>
             <td class="text-right">50</td>
             <td class="text-right">
-                镇坪 南阳 方城 旧县 叶县
+                富士康 平顶山服务区 叶县 旧县 方城 石桥 南阳 镇平
             </td>
             <td>
-                <form method="post">
+                <a asp-action="List" asp-controller="Ticket" class="btn btn-sm btn-primary">预定</a>
+                @*<form method="post">
                     <input type="hidden" name="ProductID"
                            value="" />
                     <input type="hidden" name="returnUrl"
@@ -165,7 +172,7 @@
                     <button type="submit" class="btn btn-sm btn-danger ">
                         预定
                     </button>
-                </form>
+                </form>*@
             </td>
         </tr>
     </tbody>

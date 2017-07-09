@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Ticket>
+@{
+    ViewBag.Title = "All Tickets";
+}
+@if (TempData["message"] != null)
+{
+    <div class="alert alert-success">@TempData["message"]</div>
+}
+<table class="table table-striped table-bordered table-condensed">
+    <tr>
+        <th class="text-right">ID</th>
+        <th>始发站</th>
+        <th>到达站</th>
+        <th class="text-right">票价</th>
+        <th class="text-center">操作</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="text-right">@item.TicketID</td>
+            <td>@item.StartStation</td>
+            <td>@item.TerminalStation</td>
+            <td class="text-right">@item.Price.ToString("c")</td>
+            <td class="text-center">
+                <form asp-action="Delete" method="post">
+                    <a asp-action="Edit" class="btn btn-sm btn-warning" asp-route-ticketId="@item.TicketID">编辑</a>
+                    <input type="hidden" name="ProductID" value="@item.TicketID" />
+                    <button type="submit" class="btn btn-danger btn-sm">删除</button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
+<div class="text-center">
+    <a asp-action="Create" class="btn btn-primary">添加</a>
+</div>

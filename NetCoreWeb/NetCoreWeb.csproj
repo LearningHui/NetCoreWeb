@@ -45,5 +45,8 @@
     <Folder Include="Views\DishOrder\" />
     <Folder Include="wwwroot\files\pictures\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TlSLib\TlSLib.csproj" />
+  </ItemGroup>
 
 </Project>

@@ -11,6 +11,7 @@ namespace NetCoreWeb.Areas.Bus.Models
         private List<TicketCartLine> lineCollection = new List<TicketCartLine>();
         public virtual void AddItem(Ticket ticket, int quantity)
         {
+            Clear();//每次只能选一张票
             TicketCartLine line = lineCollection.Where(t => t.Ticket.TicketID == ticket.TicketID).FirstOrDefault();
             if (line == null)
             {

@@ -5,10 +5,27 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace NetCoreWeb.Migrations.BusTicketDb
 {
-    public partial class TicketOrder : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Tickets",
+                columns: table => new
+                {
+                    TicketID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Category = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(nullable: false),
+                    Price = table.Column<decimal>(nullable: false),
+                    StartStation = table.Column<string>(nullable: false),
+                    TerminalStation = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tickets", x => x.TicketID);
+                });
+
             migrationBuilder.CreateTable(
                 name: "TicketOrders",
                 columns: table => new
@@ -67,6 +84,9 @@ namespace NetCoreWeb.Migrations.BusTicketDb
         {
             migrationBuilder.DropTable(
                 name: "TicketCartLine");
+
+            migrationBuilder.DropTable(
+                name: "Tickets");
 
             migrationBuilder.DropTable(
                 name: "TicketOrders");

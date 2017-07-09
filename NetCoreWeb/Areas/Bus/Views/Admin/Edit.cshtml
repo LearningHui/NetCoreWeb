@@ -1,0 +1,36 @@
+﻿@model Ticket
+@{
+    ViewBag.Title = "Edit Ticket";
+}
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="TicketID" />
+    <div class="form-group">
+        <label asp-for="StartStation">始发站：</label>
+        <div><span asp-validation-for="StartStation" class="text-danger"></span></div>
+        <input asp-for="StartStation" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="TerminalStation">到达站：</label>
+        <div><span asp-validation-for="TerminalStation" class="text-danger"></span></div>
+        <input asp-for="TerminalStation" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Price">票价：</label>
+        <div><span asp-validation-for="Price" class="text-danger"></span></div>
+        <input asp-for="Price" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">描述/备注（选填）：</label>
+        <div><span asp-validation-for="Description" class="text-danger"></span></div>
+        <textarea asp-for="Description" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+        <label asp-for="Category">类别：</label>
+        <div><span asp-validation-for="Category" class="text-danger"></span></div>
+        <input asp-for="Category" class="form-control" />
+    </div>    
+    <div class="form-group">
+        <button class="btn btn-primary" type="submit">保存</button>
+        <a asp-action="Index" class="btn btn-default">取消</a>
+    </div>
+</form> 

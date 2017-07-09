@@ -16,8 +16,12 @@ namespace NetCoreWeb.Areas.Bus.Controllers
             repository = repo;
         }
         public ViewResult Index() => View(repository.Tickets);
-        public ViewResult Edit(int ticketId) =>
-            View(repository.Tickets.FirstOrDefault(p => p.TicketID == ticketId));
+        public ViewResult Edit(int ticketId)
+        {
+            var ticket = repository.Tickets.FirstOrDefault(p => p.TicketID == ticketId);
+            return View(ticket);
+        } 
+            
         [HttpPost]
         public IActionResult Edit(Ticket ticket)
         {

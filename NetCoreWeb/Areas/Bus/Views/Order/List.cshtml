@@ -1,0 +1,64 @@
+﻿@model IEnumerable<TicketOrder>
+@{
+    ViewBag.Title = "Orders";
+}
+@if (Model.Count() > 0)
+{
+    
+        @foreach (TicketOrder o in Model)
+        {
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <th>手机号</th>
+                    <th>订票时间</th>
+                    @*<th colspan="2">Details</th>*@
+                    <th>数量</th>
+                    <th>票款</th>                    
+                    <th>操作</th>
+                </tr>
+                <tr>
+                    <td>@o.Phone</td>
+                    @*<td>@o.Name</td>*@
+                    <td>@o.OrderTime.ToString()</td>
+                    <th>@o.Lines.Sum(e => e.Quantity)</th>
+                    <th>@o.Lines.Sum(e => e.Ticket.Price * e.Quantity)</th> 
+                    <td>
+                        @if (!o.Paid)
+                        {
+
+                            <form asp-action="MarkPaid" method="post">
+                                <input type="hidden" name="orderId" value="@o.TicketOrderID" />
+                                <button type="submit" class="btn btn-sm btn-danger">确认收款</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <button type="button" class="btn btn-sm btn-success">已经付款</button>
+                        }
+                    </td>                    
+                </tr>
+                @foreach (TicketCartLine line in o.Lines)
+                {
+                    <tr>
+                        <td colspan="5">@line.Ticket.StartStation - @line.Ticket.TerminalStation @line.Ticket.Price × @line.Quantity</td>
+                        @*<td>@line.Ticket.TerminalStation</td>
+                        <td>@line.Ticket.Price</td>
+                        <td>@line.Quantity</td>*@
+                    </tr>
+                    @*<tr>
+
+                        <td>@line.Ticket.StartStation</td>
+                        <td>@line.Ticket.TerminalStation</td>
+                        <td>@line.Ticket.Price</td>
+                        <td>@line.Quantity</td>
+                    </tr>*@
+                }
+            </table>
+            <br />
+        }
+
+}
+else
+{
+    <div class="text-center">暂时没有订票数据！</div>
+}
