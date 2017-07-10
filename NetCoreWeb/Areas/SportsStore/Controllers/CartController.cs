@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace NetCoreWeb.Areas.SportsStore.Controllers
 {
+    [Area("SportsStore")]
     public class CartController : Controller
     {
         private IProductRepository repository;

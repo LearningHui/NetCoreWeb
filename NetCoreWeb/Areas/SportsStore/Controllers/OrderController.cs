@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace NetCoreWeb.Areas.SportsStore.Controllers
 {
+    [Area("SportsStore")]
     public class OrderController : Controller
     {
         private IOrderRepository repository;

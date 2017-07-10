@@ -9,6 +9,7 @@ using NetCoreWeb.Areas.SportsStore.Models.ViewModels;
 
 namespace NetCoreWeb.Areas.SportsStore.Controllers
 {
+    [Area("SportsStore")]
     public class ProductController : Controller
     {
         private IProductRepository repository;

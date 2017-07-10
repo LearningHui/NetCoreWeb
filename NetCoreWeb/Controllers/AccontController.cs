@@ -1,17 +1,16 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc;
-using NetCoreWeb.Areas.SportsStore.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using NetCoreWeb.Models.ViewModels;
+using Microsoft.AspNetCore.Identity;
 
-namespace NetCoreWeb.Areas.SportsStore.Controllers
+namespace NetCoreWeb.Controllers
 {
     [Authorize]
-    [Area("SportsStore")]
     public class AccountController : Controller
     {
         private UserManager<IdentityUser> userManager;
