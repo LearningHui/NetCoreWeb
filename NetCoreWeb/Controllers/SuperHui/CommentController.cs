@@ -21,10 +21,23 @@ namespace NetCoreWeb.Controllers.SuperHui
         //comments list
         public ViewResult List(int page = 1)
         {
-            return View(new CommentsListViewModel
+            //return View(new CommentsListViewModel
+            //{
+            //    Comments=repository.Comments
+            //    .OrderBy(c=>c.CommentID)
+            //    .Skip((page - 1) * PageSize)
+            //    .Take(PageSize),
+            //    PagingInfo = new PagingInfo
+            //    {
+            //        CurrentPage = page,
+            //        ItemsPerPage = PageSize,
+            //        TotalItems = repository.Comments.Count()
+            //    }
+            //});
+            ViewBag.CommentsListViewModel = new CommentsListViewModel
             {
-                Comments=repository.Comments
-                .OrderBy(c=>c.CommentID)
+                Comments = repository.Comments
+                .OrderBy(c => c.CommentID).Reverse()
                 .Skip((page - 1) * PageSize)
                 .Take(PageSize),
                 PagingInfo = new PagingInfo
@@ -33,7 +46,8 @@ namespace NetCoreWeb.Controllers.SuperHui
                     ItemsPerPage = PageSize,
                     TotalItems = repository.Comments.Count()
                 }
-            });
+            };
+            return View(new Comment());
         }
         public IActionResult Create()
         {

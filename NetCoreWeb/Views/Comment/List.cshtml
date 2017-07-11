@@ -1,9 +1,43 @@
-@model NetCoreWeb.Models.SuperHui.ViewModels.CommentsListViewModel
-@foreach (var p in Model.Comments)
+﻿@*@model NetCoreWeb.Models.SuperHui.ViewModels.CommentsListViewModel*@
+@model Comment
+
+@*创建评论*@
+<h4>别挥一挥衣袖转身离开嘛，请给出你的意见或建议</h4>
+<form asp-action="Create" method="post">
+    <input type="hidden" asp-for="CommentID"/>
+    <div class="form-group">
+        <label asp-for="Content"></label>
+        <div><span asp-validation-for="Content" class="text-danger"></span></div>
+        <textarea asp-for="Content" class="form-control"></textarea>
+    </div>
+    <div>
+        <button class="btn btn-primary" type="submit">提交</button>        
+    </div>
+</form>
+<br/>
+
+
+
+
+@*评论列表*@
+@*@foreach (var p in Model.Comments)
+    {
+        @Html.Partial("CommentSummary", p)
+    }
+    <div page-model="@Model.PagingInfo"
+         page-action="List"
+         page-classes-enabled="true"
+         page-class="btn"
+         page-class-normal="btn-default"
+         page-class-selected="btn-primary"
+         class="btn-group pull-right">
+    </div>*@
+
+@foreach (var p in (IEnumerable<Comment>)@ViewBag.CommentsListViewModel.Comments)
 {
     @Html.Partial("CommentSummary", p)
 }
-<div page-model="@Model.PagingInfo"
+<div page-model="@ViewBag.CommentsListViewModel.PagingInfo"
      page-action="List"
      page-classes-enabled="true"
      page-class="btn"

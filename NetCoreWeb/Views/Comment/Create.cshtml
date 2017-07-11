@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Comment";
 }
-<h3>别挥一挥衣袖转身离开嘛，请给出你的意见或建议</h3>
+<h4>别挥一挥衣袖转身离开嘛，请给出你的意见或建议</h4>
 <form asp-action="Create" method="post">
     <input type="hidden" asp-for="CommentID" />
     <div class="form-group">
@@ -12,6 +12,5 @@
     </div>
     <div>
         <button class="btn btn-primary" type="submit">提交</button>
-        <a asp-action="List" class="btn btn-default">查看</a>
     </div>
 </form> 
