@@ -1,16 +1,31 @@
 ﻿@model Comment
 
 @*<div class="well">
-    <div>
-        <span class="lead">
-            @Model.Content
+        <div>
+            <span class="lead">
+                @Model.Content
+            </span>
+        </div>
+        <span class="label label-primary">
+                @Model.Time.ToString()
         </span>
-    </div>    
-    <span class="label label-primary">
-            @Model.Time.ToString()
-    </span>
-    
-</div>*@ 
+
+    </div>*@
+
+
+@*<div class="media">
+        <div class="media-left">
+            <a href="#">
+                <img class="media-object" style="width: 64px; height: 64px;" alt="64x64" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgNjQgNjQiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUgbWVldCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0Ij48IS0tClNvdXJjZSBVUkw6IGhvbGRlci5qcy82NHg2NApDcmVhdGVkIHdpdGggSG9sZGVyLmpzIDIuNi4wLgpMZWFybiBtb3JlIGF0IGh0dHA6Ly9ob2xkZXJqcy5jb20KKGMpIDIwMTItMjAxNSBJdmFuIE1hbG9waW5za3kgLSBodHRwOi8vaW1za3kuY28KLS0+PGRlZnM+PHN0eWxlIHR5cGU9InRleHQvY3NzIj4jaG9sZGVyXzE1ZDMwZWM5MzcwIHRleHQgeyBmaWxsOiNBQUFBQUE7Zm9udC13ZWlnaHQ6Ym9sZDtmb250LWZhbWlseTpBcmlhbCwgSGVsdmV0aWNhLCBPcGVuIFNhbnMsIHNhbnMtc2VyaWYsIG1vbm9zcGFjZTtmb250LXNpemU6MTBwdCB9IDwvc3R5bGU+PC9kZWZzPjxnIGlkPSJob2xkZXJfMTVkMzBlYzkzNzAiPjxyZWN0IGZpbGw9IiNlZWVlZWUiIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgLz48Zz48dGV4dCB4PSIxMy40NzUiIHk9IjM2LjU5OSI+NjR4NjQ8L3RleHQ+PC9nPjwvZz48L3N2Zz4=" data-src="holder.js/64x64" data-holder-rendered="true">
+            </a>
+        </div>
+        <div class="media-body">
+            <h4 class="media-heading">Media heading</h4>
+            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
+
+        </div>
+    </div>*@
+
 
 <blockquote class="well">
     <p>@Model.Content</p>
