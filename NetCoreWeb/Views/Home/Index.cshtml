@@ -10,7 +10,7 @@
         <li data-target="#myCarousel" data-slide-to="3"></li>
     </ol>
     <div class="carousel-inner" role="listbox">
-        <div class="item active">
+        <div class="item active">            
             <img src="~/images/banner1_1.svg" alt="ASP.NET" class="img-responsive" />
             <div class="carousel-caption" role="option">
                 <p>Welcome to the space of super hui !</p>
@@ -47,7 +47,7 @@
                     </a>
                 </p>
             </div>
-        </div>        
+        </div>  
     </div>
     <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -63,14 +63,14 @@
         <h2>留言</h2>
         <ul>
             <li>此处你有什么想对我说的？</li>
-            <li><a asp-action="List" asp-controller="Comment">戳我</a> Give me some comments!</li>
+            <li><a asp-action="List" asp-controller="Comment">给我留言</a> </li>
         </ul>
     </div>
     <div class="col-md-3">
         <h2>上传文件</h2>
         <ul>
-            <li>将图片<a asp-action="UploadPictures" asp-controller="File">上传</a>到我的服务器中</li>
-            <li>将文件<a asp-action="UploadFiles" asp-controller="File">上传</a>到我的服务器中</li>
+            <li><a asp-action="UploadPictures" asp-controller="File">上传图片</a>到我的服务器</li>
+            <li><a asp-action="UploadFiles" asp-controller="File">上传文件</a>到我的服务器</li>
         </ul>
     </div>
     @*<div class="col-md-3">
