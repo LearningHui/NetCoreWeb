@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using NetCoreWeb.Models.SuperHui;
 using NetCoreWeb.Areas.Bus.Models;
+using NetCoreWeb.Areas.Cooking.Models;
 
 namespace NetCoreWeb.Areas.SportsStore.Models
 {
@@ -28,28 +29,28 @@ namespace NetCoreWeb.Areas.SportsStore.Models
             if (!SuperHuiContext.Dishes.Any())
             {
                 SuperHuiContext.Dishes.AddRange(
-                    new Dish { Name = "酱焖嘎鱼", Description = "肉质鲜嫩", Category = "鱼&生鲜", Price = 0, ImageSrc = "/Files/Pictures/gayu.jpg" },
-                    new Dish { Name = "糖醋鱼", Description = "武昌鱼、罗菲鱼", Category = "鱼&生鲜", Price = 0, ImageSrc = "/Files/Pictures/suantaichaorou.jpg" },
-                    new Dish { Name = "小葱拌豆腐", Description = "", Category = "凉菜", Price = 0, ImageSrc = "/Files/Pictures/hds.jpg" },
-                    new Dish { Name = "菠菜花生", Description = "", Category = "凉菜", Price = 0, ImageSrc = "/Files/Pictures/lianou.jpg" },
-                    new Dish { Name = "拍黄瓜", Description = "", Category = "凉菜", Price = 0, ImageSrc = "/Files/Pictures/hongshaorou.jpg" }
+                    new Dish { Name = "酱焖嘎鱼", Description = "肉质鲜嫩", Category = "鱼&生鲜", ImageName = "gayu.jpg" },
+                    new Dish { Name = "糖醋鱼", Description = "武昌鱼、罗菲鱼", Category = "鱼&生鲜", ImageName = "suantaichaorou.jpg" },
+                    new Dish { Name = "小葱拌豆腐", Description = "", Category = "凉菜", ImageName = "hds.jpg" },
+                    new Dish { Name = "菠菜花生", Description = "", Category = "凉菜", ImageName = "lianou.jpg" },
+                    new Dish { Name = "拍黄瓜", Description = "", Category = "凉菜", ImageName = "hongshaorou.jpg" }
                     );
                 SuperHuiContext.SaveChanges();
             }
-            BusTicketDbContext busTicketDbContext = app.ApplicationServices.GetRequiredService<BusTicketDbContext>();
-            if (!busTicketDbContext.Tickets.Any())
-            {
-                busTicketDbContext.Tickets.AddRange(
-                    new Ticket { StartStation = "富士康", TerminalStation = "平顶山服务区", Price = 40, Description = "备注信息", Category = "富士康专线" },
-                    new Ticket { StartStation = "富士康", TerminalStation = "叶县", Price = 40, Description = "备注信息", Category = "富士康专线" },
-                    new Ticket { StartStation = "富士康", TerminalStation = "旧县", Price = 40, Description = "备注信息", Category = "富士康专线" },
-                    new Ticket { StartStation = "富士康", TerminalStation = "方城", Price = 50, Description = "备注信息", Category = "富士康专线" },
-                    new Ticket { StartStation = "富士康", TerminalStation = "石桥", Price = 50, Description = "备注信息", Category = "富士康专线" },
-                    new Ticket { StartStation = "富士康", TerminalStation = "南阳", Price = 50, Description = "备注信息", Category = "富士康专线" },
-                    new Ticket { StartStation = "富士康", TerminalStation = "镇平", Price = 60, Description = "备注信息", Category = "富士康专线" }
-                    );
-                busTicketDbContext.SaveChanges();
-            }
+            //BusTicketDbContext busTicketDbContext = app.ApplicationServices.GetRequiredService<BusTicketDbContext>();
+            //if (!busTicketDbContext.Tickets.Any())
+            //{
+            //    busTicketDbContext.Tickets.AddRange(
+            //        new Ticket { StartStation = "富士康", TerminalStation = "平顶山服务区", Price = 40, Description = "备注信息", Category = "富士康专线" },
+            //        new Ticket { StartStation = "富士康", TerminalStation = "叶县", Price = 40, Description = "备注信息", Category = "富士康专线" },
+            //        new Ticket { StartStation = "富士康", TerminalStation = "旧县", Price = 40, Description = "备注信息", Category = "富士康专线" },
+            //        new Ticket { StartStation = "富士康", TerminalStation = "方城", Price = 50, Description = "备注信息", Category = "富士康专线" },
+            //        new Ticket { StartStation = "富士康", TerminalStation = "石桥", Price = 50, Description = "备注信息", Category = "富士康专线" },
+            //        new Ticket { StartStation = "富士康", TerminalStation = "南阳", Price = 50, Description = "备注信息", Category = "富士康专线" },
+            //        new Ticket { StartStation = "富士康", TerminalStation = "镇平", Price = 60, Description = "备注信息", Category = "富士康专线" }
+            //        );
+            //    busTicketDbContext.SaveChanges();
+            //}
         }
     }
 }

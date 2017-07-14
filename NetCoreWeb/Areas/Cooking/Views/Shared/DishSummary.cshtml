@@ -1,0 +1,24 @@
+﻿@model Dish
+<div class="well col-md-4">
+    <h3>
+        <strong>@Model.Name</strong>
+        <a asp-action="Create" asp-controller="Comment" asp-route-area="" class="btn btn-sm btn-primary pull-right" asp-route-productId="@Model.DishID">Like?</a>
+        @*<span class="pull-right label label-primary">
+            @Model.Price.ToString("c")
+        </span>*@
+    </h3>
+    <a href="#" class="thumbnail">
+        @*<img src="@Model.ImageSrc" alt="dish" />*@
+        <img src="/dishes/@Model.ImageName" alt="dish" />
+    </a>
+
+    @*<div><img src="~/Files/Pictures/72eb34eb-e1ff-4139-bd81-0ac368708c07.jpg" class="img-responsive" /></div>*@
+    @*<form id="@Model.DishID" asp-action="AddToMenu" asp-controller="Menu" method="post">
+        <input type="hidden" asp-for="DishID" />
+        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />        
+        <span class="lead">
+            @Model.Description
+            <button type="submit" class="btn btn-success btn-sm pull-right">Add To Menu</button>
+        </span>
+    </form>*@
+</div> 

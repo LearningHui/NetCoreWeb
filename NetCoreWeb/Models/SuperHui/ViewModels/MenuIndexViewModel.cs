@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace NetCoreWeb.Models.SuperHui.ViewModels
 {
-    public class MenuIndexViewModel
-    {
-        public Menu Menu { get; set; }
-        public string ReturnUrl { get; set; }
-    }
+    //public class MenuIndexViewModel
+    //{
+    //    public Menu Menu { get; set; }
+    //    public string ReturnUrl { get; set; }
+    //}
 }

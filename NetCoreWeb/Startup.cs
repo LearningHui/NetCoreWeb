@@ -16,6 +16,7 @@ using Microsoft.Extensions.FileProviders;
 using System.IO;
 using NetCoreWeb.Areas.Bus.Models;
 using NetCoreWeb.Areas.SportsStore.Models;
+using NetCoreWeb.Areas.Cooking.Models;
 
 namespace NetCoreWeb
 {
@@ -38,69 +39,20 @@ namespace NetCoreWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            if (appName == AppName.SportsStroe)
-            {
-                services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration["Data:SportStoreProducts:ConnectionString"]));
-                //services.AddTransient<IProductRepository, FakeProductRepository>();
-                services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(Configuration["Data:Identity:ConnectionString"]));
-                services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>();
-                services.AddTransient<IProductRepository, EFProductRepository>();
-                services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
-                services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-                services.AddTransient<IOrderRepository, EFOrderRepository>();
-                //Add framework services.
-                services.AddMvc();
-                services.AddMemoryCache();
-                services.AddSession();
-            }
-            else if(appName == AppName.UperHui)
-            {
-                services.AddDbContext<SuperHuiDbContext>(options => options.UseSqlServer(Configuration["Data:SuperHui:ConnectionString"]));
-                services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(Configuration["Data:Identity:ConnectionString"]));
-                services.AddDbContext<BusTicketDbContext>(options => options.UseSqlServer(Configuration["Data:BusTicket:ConnectionString"]));
-                services.AddTransient<ICommentRepository, EFCommentRepository>();
-                services.AddTransient<IDishRepository, EFDishRepository>();
-                services.AddTransient<ITicketRepository, EFTicketRepository>();
-                services.AddScoped<Menu>(m => SessionMenu.GetMenu(m));
-                services.AddScoped<TicketCart>(tc => SessionTicketCart.GetCart(tc));
-                services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>();
-                services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-                services.AddTransient<IDishOrderRepository, EFDishOrderRepository>();
-                services.AddTransient<ITicketOrderRepository, EFTicketOrderRepository>();
-                //Add framework services.
-                services.AddMvc();
-                services.AddMemoryCache();
-                services.AddSession();
+            SetConfigureServices(services);
 
-                #region CORS
-                services.AddCors(options =>
-                {
-                    options.AddPolicy("AllowSpecificOrigin",
-                    builder => builder.WithOrigins("http://www.zoupenghui.com").AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
-                 });
-                #endregion
-
-            }
+            #region CORS
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigin",
+                builder => builder.WithOrigins("http://www.zoupenghui.com").AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
+            });
+            #endregion
         }
         //used in develpment envirenment
         public void ConfigureDevelopmentServices(IServiceCollection services)
         {
-            services.AddDbContext<SuperHuiDbContext>(options => options.UseSqlServer(Configuration["Data:SuperHui:ConnectionString"]));
-            services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(Configuration["Data:Identity:ConnectionString"]));
-            services.AddDbContext<BusTicketDbContext>(options => options.UseSqlServer(Configuration["Data:BusTicket:ConnectionString"]));        
-            services.AddTransient<ICommentRepository, EFCommentRepository>();
-            services.AddTransient<IDishRepository, EFDishRepository>();
-            services.AddTransient<ITicketRepository, EFTicketRepository>();
-            services.AddScoped<Menu>(m => SessionMenu.GetMenu(m));
-            services.AddScoped<TicketCart>(tc => SessionTicketCart.GetCart(tc));
-            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>();
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddTransient<IDishOrderRepository, EFDishOrderRepository>();
-            services.AddTransient<ITicketOrderRepository, EFTicketOrderRepository>();
-            //Add framework services.
-            services.AddMvc();
-            services.AddMemoryCache();
-            services.AddSession();
+            SetConfigureServices(services);
 
             #region CORS
             services.AddCors(options =>
@@ -111,21 +63,49 @@ namespace NetCoreWeb
             #endregion
         }
 
+        private void SetConfigureServices(IServiceCollection services)
+        {
+            services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(Configuration["Data:Identity:ConnectionString"]));
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            //Add framework services.
+            services.AddMvc();
+            services.AddMemoryCache();
+            services.AddSession();
+            if(appName == AppName.UperHui)
+            {
+                services.AddDbContext<SuperHuiDbContext>(options => options.UseSqlServer(Configuration["Data:SuperHui:ConnectionString"]));
+                services.AddTransient<ICommentRepository, EFCommentRepository>();
+                services.AddTransient<IDishRepository, EFDishRepository>();
+                //services.AddScoped<Menu>(m => SessionMenu.GetMenu(m));
+                //services.AddTransient<IDishOrderRepository, EFDishOrderRepository>();
+            }
+            #region others
+            else if (appName == AppName.SportsStroe)
+            {
+                services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration["Data:SportStoreProducts:ConnectionString"]));
+                services.AddTransient<IProductRepository, EFProductRepository>();
+                services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+                services.AddTransient<IOrderRepository, EFOrderRepository>();
+            }
+            else if (appName == AppName.BusTicket)
+            {
+                services.AddDbContext<BusTicketDbContext>(options => options.UseSqlServer(Configuration["Data:BusTicket:ConnectionString"]));
+                services.AddTransient<ITicketRepository, EFTicketRepository>();
+                services.AddScoped<TicketCart>(tc => SessionTicketCart.GetCart(tc));
+                services.AddTransient<ITicketOrderRepository, EFTicketOrderRepository>();
+            } 
+            #endregion
+        }
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Error/Error");
-            }
+            //生产环境
+            app.UseExceptionHandler("/Error/Error");
 
             app.UseStaticFiles();
             //app.UseStaticFiles(new StaticFileOptions()
@@ -138,26 +118,11 @@ namespace NetCoreWeb
             app.UseMvc(routes =>
             {
                 routes.MapRoute(name: "Error", template: "Error", defaults: new { controller = "Error", action = "Error" });
-                if (appName == AppName.SportsStroe)
-                {                    
-                    routes.MapRoute(name: null, template: "{category}/Page{page:int}", defaults: new { controller = "Product", action = "List" });
-                    routes.MapRoute(name: null, template: "Page{page:int}", defaults: new { controller = "Product", action = "List", page = 1 });
-                    routes.MapRoute(name: null, template: "{category}", defaults: new { controller = "Product", action = "List", page = 1 });
-                    routes.MapRoute(name: null, template: "", defaults: new { controller = "Product", action = "List", page = 1 });
-                    routes.MapRoute(name: null, template: "{controller}/{action}/{id?}");
-                }    
-                else
-                {
-                    routes.MapRoute(name: "areas", template: "{area:exists}/{controller=Home}/{action=Index}");
-                    routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
-                }
+                routes.MapRoute(name: "areas", template: "{area:exists}/{controller=Home}/{action=Index}");
+                routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
             });
             // Shows UseCors with named policy.
             app.UseCors("AllowSpecificOrigin");            
-            if (appName == AppName.SportsStroe)
-            {
-                SeedData.EnsurePopulated(app);
-            }
             IdentitySeedData.EnsurePopulated(app);
         }
         //used in develpment envirenment
@@ -165,6 +130,8 @@ namespace NetCoreWeb
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            //development 
             app.UseDeveloperExceptionPage();
             app.UseBrowserLink();
 
@@ -173,6 +140,11 @@ namespace NetCoreWeb
             {
                 FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot/Files/Pictures")),
                 RequestPath = new PathString("/Pictures")
+            });
+            app.UseStaticFiles(new StaticFileOptions()//烹饪菜品图片文件
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot/Files/Pictures/Dishes")),
+                RequestPath = new PathString("/Dishes")
             });
             app.UseDirectoryBrowser(new DirectoryBrowserOptions()//文件目录浏览（危险，默认禁止启用）
             {
@@ -201,21 +173,15 @@ namespace NetCoreWeb
             });
             // Shows UseCors with named policy.
             app.UseCors("AllowSpecificOrigin");
-            //if (appName == AppName.SportsStroe)
-            //{
-            //    SeedData.EnsurePopulated(app);
-            //}
             SeedData.EnsurePopulated(app);
             IdentitySeedData.EnsurePopulated(app);
         }
     }
-
-    //"SPORTS_STROE" -- the app used for test
-    //"SUPER_HUI"-- my personal website
     public enum AppName
     {
-        SportsStroe,
-        UperHui
+        UperHui,//my main app
+        SportsStroe,//Just used for dev test
+        BusTicket//used in Ticket Order app         
     }
 
 }

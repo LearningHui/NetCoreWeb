@@ -41,9 +41,8 @@
     <Folder Include="Views\Error\" />
     <Folder Include="Views\Pictures\" />
     <Folder Include="Views\File\" />
-    <Folder Include="Views\Dish\" />
-    <Folder Include="Views\DishOrder\" />
-    <Folder Include="wwwroot\files\pictures\" />
+    <Folder Include="Areas\Cooking\Views\DishOrder\" />
+    <Folder Include="wwwroot\files\pictures\dishes\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TlSLib\TlSLib.csproj" />
