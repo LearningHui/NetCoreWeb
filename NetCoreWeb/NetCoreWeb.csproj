@@ -10,12 +10,8 @@
 
   <ItemGroup>
     <Content Include="wwwroot\css\signin.css" />
-    <Content Include="wwwroot\files\pictures\dishes\gayu.jpg" />
-    <Content Include="wwwroot\files\pictures\dishes\hds.JPG" />
-    <Content Include="wwwroot\files\pictures\dishes\hongshaorou.jpg" />
-    <Content Include="wwwroot\files\pictures\dishes\jiangniurou.jpg" />
-    <Content Include="wwwroot\files\pictures\dishes\lianou.jpg" />
-    <Content Include="wwwroot\files\pictures\dishes\suantaichaorou.jpg" />
+    <Content Include="wwwroot\js\h5upload.js" />
+    <Content Include="wwwroot\js\zepto.min.js" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.0" />
@@ -46,8 +42,8 @@
     <Folder Include="Areas\SportsStore\Views\Admin\" />
     <Folder Include="Views\Error\" />
     <Folder Include="Views\Pictures\" />
-    <Folder Include="Views\File\" />
     <Folder Include="Areas\Cooking\Views\DishOrder\" />
+    <Folder Include="wwwroot\files\pictures\dishes\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TlSLib\TlSLib.csproj" />
