@@ -16,7 +16,7 @@ namespace NetCoreWeb.Areas.Cooking.Models
         /// 菜品图片名称
         /// </summary>
         public string ImageName{ get; set; }
-        public string Remark { get; set; }
-        public bool Disabled { get; set; }
+        public string Remark { get; set; }//备注
+        public bool Disabled { get; set; }//是否可用（软删除）
     }
 }

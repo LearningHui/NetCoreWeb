@@ -108,11 +108,22 @@ namespace NetCoreWeb
             app.UseExceptionHandler("/Error/Error");
 
             app.UseStaticFiles();
-            //app.UseStaticFiles(new StaticFileOptions()
-            //{
-            //    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot/Files")),
-            //    RequestPath = new PathString("/src")
-            //});
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot/Files/Pictures")),
+                RequestPath = new PathString("/Pictures")
+            });
+            app.UseStaticFiles(new StaticFileOptions()//烹饪菜品图片文件
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot/Files/Pictures/Dishes")),
+                RequestPath = new PathString("/Dishes")
+            });
+            app.UseDirectoryBrowser(new DirectoryBrowserOptions()//文件目录浏览（危险，默认禁止启用）
+            {
+                FileProvider = new PhysicalFileProvider(
+                Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot/Files/Pictures")),
+                RequestPath = new PathString("/Pictures")
+            });
             app.UseSession();
             app.UseIdentity();
             app.UseMvc(routes =>

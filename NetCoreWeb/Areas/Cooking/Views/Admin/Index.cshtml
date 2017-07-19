@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Dish>
+@{
+    ViewBag.Title = "All Dishes";
+}
+<style type="text/css">
+    td {
+        vertical-align:middle;
+    }
+</style>
+<table class="table table-striped table-bordered table-condensed">
+    <tr>
+        <th class="text-center">ID</th>
+        <th class="text-center">Name</th>
+        <th class="text-center">Price</th>
+        <th class="text-center">Actions</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="text-center" style="vertical-align:middle">@item.DishID</td>
+            <td class="text-center" style="vertical-align:middle">
+                <a href="#">
+                    <img style="width: 64px;" alt="64x64" src="/dishes/@item.ImageName" data-holder-rendered="true">
+                </a>
+            </td>
+            <td class="text-center" style="vertical-align:middle">@item.Name</td>
+            <td class="text-center" style="vertical-align:middle">
+                <form asp-action="Delete" method="post">
+                    <a asp-action="Edit" class="btn btn-sm btn-warning" asp-route-dishId="@item.DishID">Edit</a>
+                    <input type="hidden" name="DishID" value="@item.DishID" />
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
+<div class="text-center">
+    <a asp-action="Create" class="btn btn-primary">Add Dish</a>
+</div>
