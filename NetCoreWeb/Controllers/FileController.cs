@@ -111,5 +111,12 @@ namespace NetCoreWeb.Controllers
             else
                 return (KB / (1024*1024)).ToString() + "GB";
         }
+
+
+
+        public IActionResult UploadPictures1()
+        {
+            return View("UploadPictures2");
+        }
     }
 }
