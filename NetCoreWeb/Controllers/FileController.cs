@@ -117,6 +117,6 @@ namespace NetCoreWeb.Controllers
         public IActionResult UploadPictures1()
         {
             return View("UploadPictures2");
-        }
+        }    
     }
 }

@@ -37,6 +37,8 @@
   <ItemGroup>
     <Folder Include="Areas\Bus\Controllers\" />
     <Folder Include="Areas\Bus\Views\Cart\" />
+    <Folder Include="Areas\Photo\Controllers\" />
+    <Folder Include="Areas\Photo\Models\" />
     <Folder Include="Areas\SportsStore\Views\Account\" />
     <Folder Include="Views\Pictures\" />
     <Folder Include="Areas\SportsStore\Views\Admin\" />
