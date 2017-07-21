@@ -1,4 +1,4 @@
-﻿
+﻿@model AlbumListViewModel
 @{
     ViewData["Title"] = "Index";
 }
@@ -44,9 +44,16 @@
 
 
     </div>
-    <nav class="pagination">
+    @*<nav class="pagination">
         <span class="page-number">第 1 页/共 84 页</span>
         <a class="older-posts" href="/page/2/">下一页 &rarr;</a>
+    </nav>*@
+    <nav page-model="@Model.PagingInfo"
+         page-action="List"
+         page-url-category="@Model.CurrentCategory"
+         page-pre-class="newer-posts"
+         page-next-class="older-posts"
+         class="pagination">
     </nav>
     @*<div page-model="@Model.PagingInfo"
          page-action="List"
@@ -56,6 +63,6 @@
          page-class-selected="btn-primary"
          page-url-category="@Model.CurrentCategory"
          class="btn-group pull-right">
-    </div>*@
+    </div>*@  
 </div>
 
