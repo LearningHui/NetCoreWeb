@@ -3,10 +3,32 @@
     ViewData["Title"] = "Index";
 }
 
-<div class="container">
+<div class="container">    
     <div class="row" id="post-list">
+        @foreach (var a in Model.Albums)
+        {
+            <div class="col-xs-12 col-sm-6">
+                <article class="post tag-chinese-website tag-bootstrap-v3">
+                    <h3 class="post-title">
+                        <a href="/circleci/" onclick="_hmt.push(['_trackEvent', 'titlelink', 'click', 'CircleCI'])" target="_blank">@a.Name</a>
+                    </h3>
+                    <div class="post-featured-image">
+                        <a class="thumbnail" href="/circleci/" onclick="_hmt.push(['_trackEvent', 'imagelink', 'click', 'CircleCI'])" target="_blank">
+                            <img src="http://image.youzhan.org/a/e1/e235a09426f32cc5b31a0a7ec3109.png!thumb" width="700" height="438" alt="CircleCI" onload="imgLoaded(this)">
+                        </a>
+                    </div>
+                    <div class="post-content">
+                        <p>
+                            <a href="https://circleci.com/">@a.Name</a>
+                        </p>
+                    </div>
+                </article>
+            </div>
+        }
 
-        <div class="col-xs-12 col-sm-6">
+
+
+        @*<div class="col-xs-12 col-sm-6">
             <article class="post tag-chinese-website tag-bootstrap-v3">
                 <h2 class="post-title">
                     <a href="/circleci/" onclick="_hmt.push(['_trackEvent', 'titlelink', 'click', 'CircleCI'])" target="_blank">CircleCI</a>
@@ -40,7 +62,7 @@
                     </p>
                 </div>
             </article>
-        </div>
+        </div>*@
 
 
     </div>
@@ -55,14 +77,5 @@
          page-next-class="older-posts"
          class="pagination">
     </nav>
-    @*<div page-model="@Model.PagingInfo"
-         page-action="List"
-         page-classes-enabled="true"
-         page-class="btn"
-         page-class-normal="btn-default"
-         page-class-selected="btn-primary"
-         page-url-category="@Model.CurrentCategory"
-         class="btn-group pull-right">
-    </div>*@  
 </div>
 

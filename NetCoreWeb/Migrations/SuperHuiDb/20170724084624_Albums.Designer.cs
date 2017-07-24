@@ -8,9 +8,10 @@ using NetCoreWeb.Models.SuperHui;
 namespace NetCoreWeb.Migrations.SuperHuiDb
 {
     [DbContext(typeof(SuperHuiDbContext))]
-    partial class SuperHuiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170724084624_Albums")]
+    partial class Albums
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")

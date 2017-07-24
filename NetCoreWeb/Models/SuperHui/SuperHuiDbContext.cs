@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NetCoreWeb.Areas.Cooking.Models;
+using NetCoreWeb.Areas.Photo.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,6 @@ namespace NetCoreWeb.Models.SuperHui
         public SuperHuiDbContext(DbContextOptions<SuperHuiDbContext> options) : base(options) { }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Dish> Dishes { get; set; }
+        public DbSet<Album> Albums { get; set; }
     }
 }

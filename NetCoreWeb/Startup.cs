@@ -17,6 +17,7 @@ using System.IO;
 using NetCoreWeb.Areas.Bus.Models;
 using NetCoreWeb.Areas.SportsStore.Models;
 using NetCoreWeb.Areas.Cooking.Models;
+using NetCoreWeb.Areas.Photo.Models;
 
 namespace NetCoreWeb
 {
@@ -77,6 +78,7 @@ namespace NetCoreWeb
                 services.AddDbContext<SuperHuiDbContext>(options => options.UseSqlServer(Configuration["Data:SuperHui:ConnectionString"]));
                 services.AddTransient<ICommentRepository, EFCommentRepository>();
                 services.AddTransient<IDishRepository, EFDishRepository>();
+                services.AddTransient<IAlbumRepository, EFAlbumRepository>();
                 //services.AddScoped<Menu>(m => SessionMenu.GetMenu(m));
                 //services.AddTransient<IDishOrderRepository, EFDishOrderRepository>();
             }
