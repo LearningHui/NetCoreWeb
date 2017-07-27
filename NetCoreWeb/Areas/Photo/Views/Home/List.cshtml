@@ -1,4 +1,4 @@
-﻿@model AlbumListViewModel
+@model AlbumListViewModel
 @{
     ViewData["Title"] = "Index";
 }
@@ -9,18 +9,13 @@
         {
             <div class="col-xs-12 col-sm-6">
                 <article class="post tag-chinese-website tag-bootstrap-v3">
-                    <h3 class="post-title">
-                        <a href="/circleci/" onclick="_hmt.push(['_trackEvent', 'titlelink', 'click', 'CircleCI'])" target="_blank">@a.Name</a>
-                    </h3>
+                    <h2 class="post-title">
+                        <a href="/circleci/">@a.Name</a>
+                    </h2>
                     <div class="post-featured-image">
-                        <a class="thumbnail" href="/circleci/" onclick="_hmt.push(['_trackEvent', 'imagelink', 'click', 'CircleCI'])" target="_blank">
-                            <img src="http://image.youzhan.org/a/e1/e235a09426f32cc5b31a0a7ec3109.png!thumb" width="700" height="438" alt="CircleCI" onload="imgLoaded(this)">
+                        <a class="thumbnail" href="/circleci/">
+                            <img src="http://image.youzhan.org/a/e1/e235a09426f32cc5b31a0a7ec3109.png!thumb" width="700" height="438" alt="ShootByHui" onload="imgLoaded(this)">
                         </a>
-                    </div>
-                    <div class="post-content">
-                        <p>
-                            <a href="https://circleci.com/">@a.Name</a>
-                        </p>
                     </div>
                 </article>
             </div>
@@ -63,13 +58,7 @@
                 </div>
             </article>
         </div>*@
-
-
     </div>
-    @*<nav class="pagination">
-        <span class="page-number">第 1 页/共 84 页</span>
-        <a class="older-posts" href="/page/2/">下一页 &rarr;</a>
-    </nav>*@
     <nav page-model="@Model.PagingInfo"
          page-action="List"
          page-url-category="@Model.CurrentCategory"

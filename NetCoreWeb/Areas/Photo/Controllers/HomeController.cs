@@ -37,5 +37,10 @@ namespace NetCoreWeb.Areas.Photo.Controllers
                 CurrentCategory = category
             });
         }
+        public IActionResult Album ()
+        {
+
+        }
+
     }
 }
