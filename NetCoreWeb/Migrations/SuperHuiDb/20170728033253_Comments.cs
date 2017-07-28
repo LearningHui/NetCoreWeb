@@ -5,32 +5,29 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace NetCoreWeb.Migrations.SuperHuiDb
 {
-    public partial class Albums : Migration
+    public partial class Comments : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Albums",
+                name: "Comments",
                 columns: table => new
                 {
-                    AlbumID = table.Column<int>(nullable: false)
+                    CommentID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Category = table.Column<string>(nullable: true),
-                    CreateTime = table.Column<DateTime>(nullable: false),
-                    Description = table.Column<string>(nullable: true),
-                    Disabled = table.Column<bool>(nullable: false),
-                    Name = table.Column<string>(nullable: true)
+                    Content = table.Column<string>(nullable: false),
+                    Time = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Albums", x => x.AlbumID);
+                    table.PrimaryKey("PK_Comments", x => x.CommentID);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Albums");
+                name: "Comments");
         }
     }
 }

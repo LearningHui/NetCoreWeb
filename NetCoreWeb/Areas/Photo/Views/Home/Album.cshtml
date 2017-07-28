@@ -1,0 +1,21 @@
+﻿@model Album
+@{
+    ViewData["Title"] = "Album";
+}
+
+<div class="row">
+    @foreach (var p in Model.Lines)
+    {
+        <div class="well col-md-4">
+            <h3>
+                <strong>@Model.Name</strong>
+                <a asp-action="Create" asp-controller="Comment" asp-route-area="" class="btn btn-sm btn-primary pull-right" asp-route-productId="@Model.AlbumID">Like?</a>
+            </h3>
+            <a href="#" class="thumbnail">
+                <img src="/Albums/@Model.Name/@p.Picture.PictureName" alt="Albums" />
+            </a>
+        </div>
+    }
+    
+</div>
+

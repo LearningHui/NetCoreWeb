@@ -1,0 +1,70 @@
+@model AlbumListViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">    
+    <div class="row" id="post-list">
+        @foreach (var a in Model.Albums)
+        {
+            <div class="col-xs-12 col-sm-6">
+                <article class="post tag-chinese-website tag-bootstrap-v3">
+                    <h2 class="post-title">
+                        <a href="/circleci/">@a.Name</a>
+                    </h2>
+                    <div class="post-featured-image">
+                        <a class="thumbnail" asp-action="Album" asp-route-albumId="@a.AlbumID">
+                            <img src="http://image.youzhan.org/a/e1/e235a09426f32cc5b31a0a7ec3109.png!thumb" width="700" height="438" alt="ShootByHui" onload="imgLoaded(this)">
+                        </a>
+                    </div>
+                </article>
+            </div>
+        }
+
+
+
+        @*<div class="col-xs-12 col-sm-6">
+            <article class="post tag-chinese-website tag-bootstrap-v3">
+                <h2 class="post-title">
+                    <a href="/circleci/" onclick="_hmt.push(['_trackEvent', 'titlelink', 'click', 'CircleCI'])" target="_blank">CircleCI</a>
+                </h2>
+                <div class="post-featured-image">
+                    <a class="thumbnail" href="/circleci/" onclick="_hmt.push(['_trackEvent', 'imagelink', 'click', 'CircleCI'])" target="_blank">
+                        <img src="http://image.youzhan.org/a/e1/e235a09426f32cc5b31a0a7ec3109.png!thumb" width="700" height="438" alt="CircleCI" onload="imgLoaded(this)">
+                    </a>
+                </div>
+                <div class="post-content">
+                    <p>
+                        <a href="https://circleci.com/">CircleCI</a>
+                    </p>
+                </div>
+            </article>
+        </div>
+
+        <div class="col-xs-12 col-sm-6">
+            <article class="post tag-foreign-website tag-bootstrap-v3 tag-opensource-project">
+                <h2 class="post-title">
+                    <a href="/gpu-js/" onclick="_hmt.push(['_trackEvent', 'titlelink', 'click', 'gpu.js'])" target="_blank">gpu.js</a>
+                </h2>
+                <div class="post-featured-image">
+                    <a class="thumbnail" href="/gpu-js/" onclick="_hmt.push(['_trackEvent', 'imagelink', 'click', 'gpu.js'])" target="_blank">
+                        <img src="http://image.youzhan.org/d/53/5402f76ccd401d7c035c2ec503a5a.png!thumb" width="700" height="438" alt="gpu.js" onload="imgLoaded(this)">
+                    </a>
+                </div>
+                <div class="post-content">
+                    <p>
+                        <a href="http://gpu.rocks/">gpu.js</a>
+                    </p>
+                </div>
+            </article>
+        </div>*@
+    </div>
+    <nav page-model="@Model.PagingInfo"
+         page-action="List"
+         page-url-category="@Model.CurrentCategory"
+         page-pre-class="newer-posts"
+         page-next-class="older-posts"
+         class="pagination">
+    </nav>
+</div>
+

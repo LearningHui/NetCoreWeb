@@ -8,8 +8,8 @@ using NetCoreWeb.Models.SuperHui;
 namespace NetCoreWeb.Migrations.SuperHuiDb
 {
     [DbContext(typeof(SuperHuiDbContext))]
-    [Migration("20170724084624_Albums")]
-    partial class Albums
+    [Migration("20170728033253_Comments")]
+    partial class Comments
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -59,6 +59,42 @@ namespace NetCoreWeb.Migrations.SuperHuiDb
                     b.ToTable("Albums");
                 });
 
+            modelBuilder.Entity("NetCoreWeb.Areas.Photo.Models.Picture", b =>
+                {
+                    b.Property<int>("PictureID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("Disabled");
+
+                    b.Property<string>("Info");
+
+                    b.Property<string>("PictureName");
+
+                    b.Property<string>("Remark");
+
+                    b.HasKey("PictureID");
+
+                    b.ToTable("Pictures");
+                });
+
+            modelBuilder.Entity("NetCoreWeb.Areas.Photo.Models.PictureLine", b =>
+                {
+                    b.Property<int>("PictureLineID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("AlbumID");
+
+                    b.Property<int?>("PictureID");
+
+                    b.HasKey("PictureLineID");
+
+                    b.HasIndex("AlbumID");
+
+                    b.HasIndex("PictureID");
+
+                    b.ToTable("PictureLine");
+                });
+
             modelBuilder.Entity("NetCoreWeb.Models.SuperHui.Comment", b =>
                 {
                     b.Property<int>("CommentID")
@@ -72,6 +108,17 @@ namespace NetCoreWeb.Migrations.SuperHuiDb
                     b.HasKey("CommentID");
 
                     b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("NetCoreWeb.Areas.Photo.Models.PictureLine", b =>
+                {
+                    b.HasOne("NetCoreWeb.Areas.Photo.Models.Album")
+                        .WithMany("Lines")
+                        .HasForeignKey("AlbumID");
+
+                    b.HasOne("NetCoreWeb.Areas.Photo.Models.Picture", "Picture")
+                        .WithMany()
+                        .HasForeignKey("PictureID");
                 });
         }
     }

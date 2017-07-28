@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
 namespace NetCoreWeb.Areas.Photo.Models
@@ -10,9 +11,10 @@ namespace NetCoreWeb.Areas.Photo.Models
     {
         private SuperHuiDbContext context;
         public EFAlbumRepository(SuperHuiDbContext ctx) { context = ctx; }
-        public IEnumerable<Album> Albums => context.Albums;
+        public IEnumerable<Album> Albums => context.Albums.Include(o => o.Lines).ThenInclude(l => l.Picture);
         public void SaveAlbum(Album album)
         {
+            context.AttachRange(album.Lines.Select(a => a.Picture));
             if (album.AlbumID == 0)
             {
                 context.Albums.Add(album);
@@ -27,8 +29,9 @@ namespace NetCoreWeb.Areas.Photo.Models
                     dbEntry.Category = album.Category;
                     dbEntry.CreateTime = album.CreateTime;
                     dbEntry.Disabled = album.Disabled;
+                    dbEntry.Lines = album.Lines;
                 }
-            }
+            }            
             context.SaveChanges();
         }
         public Album DeleteAlbum(int albumID)

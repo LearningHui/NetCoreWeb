@@ -13,6 +13,7 @@ namespace NetCoreWeb.Models.SuperHui
         public SuperHuiDbContext(DbContextOptions<SuperHuiDbContext> options) : base(options) { }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Dish> Dishes { get; set; }
-        public DbSet<Album> Albums { get; set; }
+        public DbSet<Picture> Pictures { get; set; }
+        public DbSet<Album> Albums { get; set; }        
     }
 }

@@ -159,6 +159,11 @@ namespace NetCoreWeb
                 FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot/Files/Pictures/Dishes")),
                 RequestPath = new PathString("/Dishes")
             });
+            app.UseStaticFiles(new StaticFileOptions()//摄影图片文件
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot/Files/Pictures/Albums")),
+                RequestPath = new PathString("/Albums")
+            });
             app.UseDirectoryBrowser(new DirectoryBrowserOptions()//文件目录浏览（危险，默认禁止启用）
             {
                 FileProvider = new PhysicalFileProvider(
