@@ -1,0 +1,33 @@
+@model AlbumListViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">    
+    <div class="row" id="post-list">
+        @foreach (var a in Model.Albums)
+        {
+            <div class="col-xs-12 col-sm-6">
+                <article class="post tag-chinese-website tag-bootstrap-v3">
+                    <a style="margin-left:10px;margin-top:10px" asp-action="Edit" class="btn btn-sm btn-warning" asp-route-albumId="@a.AlbumID">Edit</a>
+                    <h2 class="post-title">
+                        <a href="/circleci/">@a.Name</a>
+                    </h2>
+                    <div class="post-featured-image">
+                        <a class="thumbnail" asp-action="Album" asp-route-albumId="@a.AlbumID">
+                            <img src="http://image.youzhan.org/a/e1/e235a09426f32cc5b31a0a7ec3109.png!thumb" width="700" height="438" alt="ShootByHui" onload="imgLoaded(this)">
+                        </a>
+                    </div>
+                </article>
+            </div>
+        }
+    </div>
+    <nav page-model="@Model.PagingInfo"
+         page-action="List"
+         page-url-category="@Model.CurrentCategory"
+         page-pre-class="newer-posts"
+         page-next-class="older-posts"
+         class="pagination">
+    </nav>
+</div>
+

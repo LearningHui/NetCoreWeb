@@ -8,10 +8,12 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using Microsoft.Net.Http.Headers;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NetCoreWeb.Areas.Cooking.Controllers
 {
     [Area("Cooking")]
+    [Authorize]
     public class AdminController : Controller
     {
         private IDishRepository repository;

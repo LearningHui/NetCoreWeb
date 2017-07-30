@@ -81,6 +81,8 @@ namespace NetCoreWeb.Migrations.SuperHuiDb
                     b.Property<int>("PictureID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTime>("CreateTime");
+
                     b.Property<bool>("Disabled");
 
                     b.Property<string>("Info");

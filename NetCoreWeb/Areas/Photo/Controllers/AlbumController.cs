@@ -8,6 +8,8 @@ using NetCoreWeb.Models.SuperHui;
 using NetCoreWeb.Areas.Photo.Models.ViewModels;
 using NetCoreWeb.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Net.Http.Headers;
+using System.IO;
 
 namespace NetCoreWeb.Areas.Photo.Controllers
 {
@@ -28,7 +30,7 @@ namespace NetCoreWeb.Areas.Photo.Controllers
             {
                 Albums = repository.Albums
                 .Where(p => category == null || p.Category == category)
-                .OrderBy(p => p.AlbumID)
+                .OrderBy(p => p.AlbumID).Reverse()
                 .Skip((page - 1) * PageSize)
                 .Take(PageSize),
 
@@ -41,6 +43,19 @@ namespace NetCoreWeb.Areas.Photo.Controllers
                 CurrentCategory = category
             });
         }
+        public IActionResult Album(string albumName)
+        {
+            var album = repository.Albums.FirstOrDefault(a => a.Name == albumName);
+            if (album != null)
+            {
+                return View(album);
+            }
+            else
+            {
+                return View("List");//未匹配到，跳转列表页面。此处后期优化
+            }
+        }
+
         public IActionResult Album(int albumID)
         {
             var album = repository.Albums.FirstOrDefault(a => a.AlbumID == albumID);
@@ -76,5 +91,7 @@ namespace NetCoreWeb.Areas.Photo.Controllers
             //TempData["message"] = $"{dish.Name} has been saved";
             return RedirectToAction("List");
         }
+        
     }
+
 }

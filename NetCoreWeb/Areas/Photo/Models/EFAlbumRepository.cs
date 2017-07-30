@@ -14,7 +14,8 @@ namespace NetCoreWeb.Areas.Photo.Models
         public IEnumerable<Album> Albums => context.Albums.Include(o => o.Lines).ThenInclude(l => l.Picture);
         public void SaveAlbum(Album album)
         {
-            context.AttachRange(album.Lines.Select(a => a.Picture));
+            //if(album.Lines != null)
+            //    context.AttachRange(album.Lines.Select(a => a.Picture));
             if (album.AlbumID == 0)
             {
                 context.Albums.Add(album);

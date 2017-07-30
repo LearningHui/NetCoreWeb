@@ -21,7 +21,6 @@ namespace NetCoreWeb.Areas.Photo.Controllers
         {
             repository = repo;
             context = ctx;
-            //ctx.Albums.Include(o => o.Lines).ThenInclude(l => l.Picture);
         }
         public int PageSize = 4;
         public IActionResult List(string category, int page = 1)
@@ -50,7 +49,6 @@ namespace NetCoreWeb.Areas.Photo.Controllers
             var album = repository.Albums.FirstOrDefault(a => a.AlbumID == albumID);
             if (album != null)
             {
-                //var dd = context.Albums.Include(o => o.Lines).ThenInclude(l => l.Picture);
 
                 return View(album);
             }

@@ -184,7 +184,7 @@ namespace NetCoreWeb
                     routes.MapRoute(name: null, template: "{controller}/{action}/{id?}");
                 }
                 else
-                {
+                {                   
                     routes.MapRoute(name: "areas", template: "{area:exists}/{controller=Home}/{action=Index}");
                     routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
                 }

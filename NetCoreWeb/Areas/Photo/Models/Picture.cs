@@ -12,6 +12,7 @@ namespace NetCoreWeb.Areas.Photo.Models
         public string Info { get; set; }
         public string Remark { get; set; }
         public bool Disabled { get; set; }
+        public DateTime CreateTime { get; set; }
     }
     public class AlbumPictureLine
     {
