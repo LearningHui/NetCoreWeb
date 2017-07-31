@@ -109,6 +109,8 @@ namespace NetCoreWeb.Areas.Photo.Controllers
         }
         public IActionResult Delete(int albumId)
         {
+            //var album = repository.Albums.FirstOrDefault(a => a.AlbumID == albumId);
+            repository.DeleteAlbum(albumId);
             return View();
         }
 
@@ -211,10 +213,40 @@ namespace NetCoreWeb.Areas.Photo.Controllers
 
 
 
-
-
-
-
+        public ViewResult DeletePhoto(int albumId,int albumPictureLineId)//软删除
+        {
+            bool isDelSucess = false;
+            var album = repository.Albums.FirstOrDefault(a => a.AlbumID == albumId);
+            if (album != null && album.Lines != null)
+            {
+                var matchedPhoto = album.Lines.FirstOrDefault(p => p.AlbumPictureLineID == albumPictureLineId);
+                if (matchedPhoto != null)
+                {
+                    matchedPhoto.Delete = true;
+                    isDelSucess = true;
+                    context.SaveChanges();
+                }
+            }
+            return View();
+        }
+        public ViewResult DeletePhotoCompletely(int albumId, int albumPictureLineId)
+        {
+            bool isDelSucess = false;
+            var album = repository.Albums.FirstOrDefault(a => a.AlbumID == albumId);
+            if (album != null && album.Lines != null)
+            {
+                var matchedPhoto = album.Lines.FirstOrDefault(p => p.AlbumPictureLineID == albumPictureLineId);
+                if (matchedPhoto != null)
+                {
+                    album.Lines.Remove(matchedPhoto);
+                    var filePath = hostingEnv.WebRootPath + $@"\Files\Pictures\Albums\{album.Name}\{matchedPhoto.Picture.PictureName}";
+                    System.IO.File.Delete(filePath);
+                    //Directory.Delete(filePath, true);
+                    context.SaveChanges();
+                }
+            }
+            return View();
+        }
         /// <summary>
         /// 保存上传的图片
         /// </summary>

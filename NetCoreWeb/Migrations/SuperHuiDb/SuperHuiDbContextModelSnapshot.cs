@@ -65,6 +65,8 @@ namespace NetCoreWeb.Migrations.SuperHuiDb
 
                     b.Property<int?>("AlbumID");
 
+                    b.Property<bool>("Delete");
+
                     b.Property<int?>("PictureID");
 
                     b.HasKey("AlbumPictureLineID");

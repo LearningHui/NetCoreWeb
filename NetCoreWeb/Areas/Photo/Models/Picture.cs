@@ -18,5 +18,6 @@ namespace NetCoreWeb.Areas.Photo.Models
     {
         public int AlbumPictureLineID { get; set; }
         public Picture Picture { get; set; }
+        public bool Delete { get; set; }
     }
 }
