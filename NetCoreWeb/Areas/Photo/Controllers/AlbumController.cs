@@ -43,12 +43,12 @@ namespace NetCoreWeb.Areas.Photo.Controllers
                 CurrentCategory = category
             });
         }
-        public IActionResult Album(string albumName)
+        public IActionResult Gallery(string albumName)
         {
             var album = repository.Albums.FirstOrDefault(a => a.Name == albumName);
             if (album != null)
             {
-                return View(album);
+                return View(nameof(Album),album);
             }
             else
             {
@@ -68,29 +68,29 @@ namespace NetCoreWeb.Areas.Photo.Controllers
                 return View("List");//未匹配到，跳转列表页面。此处后期优化
             }
         }
-        [HttpPost]
-        public IActionResult Edit(Album album, IList<IFormFile> files)
-        {
-            if (files.Count() > 0)
-            {
-                //string pictureName = SavePicture(files);//保存上送的图片
-                //if (!string.IsNullOrEmpty(pictureName))
-                //    dish.ImageName = pictureName;
-            }
-            Picture pic = new Picture() { PictureName = "IMG_0348.jpg" };
-            context.Pictures.Add(pic);
-            context.SaveChanges();
+        //[HttpPost]
+        //public IActionResult Edit(Album album, IList<IFormFile> files)
+        //{
+        //    if (files.Count() > 0)
+        //    {
+        //        //string pictureName = SavePicture(files);//保存上送的图片
+        //        //if (!string.IsNullOrEmpty(pictureName))
+        //        //    dish.ImageName = pictureName;
+        //    }
+        //    Picture pic = new Picture() { PictureName = "IMG_0348.jpg" };
+        //    context.Pictures.Add(pic);
+        //    context.SaveChanges();
 
-            if (album.Lines == null)
-                album.Lines = new List<AlbumPictureLine>();
-            album.Lines.Add(new AlbumPictureLine()
-            {
-                Picture = pic
-            });
-            repository.SaveAlbum(album);
-            //TempData["message"] = $"{dish.Name} has been saved";
-            return RedirectToAction("List");
-        }
+        //    if (album.Lines == null)
+        //        album.Lines = new List<AlbumPictureLine>();
+        //    album.Lines.Add(new AlbumPictureLine()
+        //    {
+        //        Picture = pic
+        //    });
+        //    repository.SaveAlbum(album);
+        //    //TempData["message"] = $"{dish.Name} has been saved";
+        //    return RedirectToAction("List");
+        //}
         
     }
 

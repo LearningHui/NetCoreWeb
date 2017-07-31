@@ -2,21 +2,21 @@
 @{
     ViewData["Title"] = "Album";
 }
-
+<h2 class="center-block">@Model.Name</h2>
 <div class="row">
     @foreach (var p in Model.Lines)
     {
-        <div class="well col-md-4">
-            <h3>
-                <strong>@Model.Name</strong>
-                <a asp-action="Create" asp-controller="Comment" asp-route-area="" class="btn btn-sm btn-primary pull-right" asp-route-productId="@Model.AlbumID">Like?</a>
-            </h3>
+        <div class="well col-md-4">            
             <a href="#" class="thumbnail">
                 <img src="/Albums/@Model.Name/@p.Picture.PictureName" alt="Albums" />
             </a>
+            <h3>
+                @*<strong>@Model.Name</strong>*@
+                <a class="btn btn-sm btn-primary" href="#">Edit</a>
+                <a class="btn btn-sm btn-warning pull-right" href="#">Del</a>
+            </h3>
         </div>
     }
-
 </div>
 
 @*<form asp-action="Edit" method="post" enctype="multipart/form-data">
