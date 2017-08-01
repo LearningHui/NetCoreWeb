@@ -93,6 +93,8 @@ namespace NetCoreWeb.Areas.Photo.Controllers
             var album = repository.Albums.FirstOrDefault(a => a.AlbumID == albumId);
             return View(album);
         }
+
+        //编辑相册
         [HttpPost]
         public IActionResult Edit(Album album)
         {
@@ -107,62 +109,63 @@ namespace NetCoreWeb.Areas.Photo.Controllers
             //TempData["message"] = $"{dish.Name} has been saved";
             return RedirectToAction("List");
         }
+
+        //删除指定的相册
         public IActionResult Delete(int albumId)
         {
-            //var album = repository.Albums.FirstOrDefault(a => a.AlbumID == albumId);
             repository.DeleteAlbum(albumId);
             return View();
         }
 
-
-
+        #region 添加图片到相册（删除）
         //添加单张图片到相册
-        public IActionResult AddPicture(int albumId)
-        {
-            ViewBag.AlbumId = albumId;
-            return View(new Picture());
-        }
-        [HttpPost]
-        public IActionResult CreatePicture(Picture picture, IList<IFormFile> files, int albumId)
-        {
-            if (ModelState.IsValid)
-            {
-                var album = repository.Albums.FirstOrDefault(a => a.AlbumID == albumId);
-                if(album != null)
-                {
-                    if (album.Lines == null)
-                        album.Lines = new List<AlbumPictureLine>();
-                }
-                else
-                {
-                    //todo:log error
-                }
-                if (files != null && files.Count() > 0)
-                {
-                    var filePath = hostingEnv.WebRootPath + $@"\Files\Pictures\Albums\{album.Name}\";
-                    foreach (var file in files)
-                    {
-                        var pictureName = SavePicture(file, filePath);//保存上送的图片
-                        if (!string.IsNullOrEmpty(pictureName))
-                        {
-                            picture.PictureName = pictureName;
-                            picture.CreateTime = DateTime.Now;
-                            context.Pictures.Add(picture);
-                            album.Lines.Add(new AlbumPictureLine() { Picture = picture });
-                            repository.SaveAlbum(album);
-                            //TempData["message"] = $"{dish.Name} has been saved";  
-                        }
-                    }                     
-                }                
-                context.SaveChanges();
-                return RedirectToAction("AddPicture", albumId);
-            }
-            else
-            {
-                // there is something wrong with the data values     
-                return RedirectToAction("List");
-            }
-        }
+        //public IActionResult AddPicture(int albumId)
+        //{
+        //    ViewBag.AlbumId = albumId;
+        //    return View(new Picture());
+        //}
+        //[HttpPost]
+        //public IActionResult CreatePicture(Picture picture, IList<IFormFile> files, int albumId)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var album = repository.Albums.FirstOrDefault(a => a.AlbumID == albumId);
+        //        if(album != null)
+        //        {
+        //            if (album.Lines == null)
+        //                album.Lines = new List<AlbumPictureLine>();
+        //        }
+        //        else
+        //        {
+        //            //todo:log error
+        //        }
+        //        if (files != null && files.Count() > 0)
+        //        {
+        //            var filePath = hostingEnv.WebRootPath + $@"\Files\Pictures\Albums\{album.Name}\";
+        //            foreach (var file in files)
+        //            {
+        //                var pictureName = SavePicture(file, filePath);//保存上送的图片
+        //                if (!string.IsNullOrEmpty(pictureName))
+        //                {
+        //                    picture.PictureName = $"/Albums/{album.Name}/{pictureName}";
+        //                    picture.CreateTime = DateTime.Now;
+        //                    context.Pictures.Add(picture);
+        //                    album.Lines.Add(new AlbumPictureLine() { Picture = picture });
+        //                    repository.SaveAlbum(album);
+        //                    //TempData["message"] = $"{dish.Name} has been saved";  
+        //                }
+        //            }                     
+        //        }                
+        //        context.SaveChanges();
+        //        return RedirectToAction("AddPicture", albumId);
+        //    }
+        //    else
+        //    {
+        //        // there is something wrong with the data values     
+        //        return RedirectToAction("List");
+        //    }
+        //} 
+        #endregion
 
         public ViewResult UploadPhoto(int albumId)=>
             View(repository.Albums.FirstOrDefault(a => a.AlbumID == albumId));
@@ -192,7 +195,7 @@ namespace NetCoreWeb.Areas.Photo.Controllers
                         if (!string.IsNullOrEmpty(pictureName))
                         {
                             var picture = new Picture();
-                            picture.PictureName = pictureName;
+                            picture.PictureName = $"/Albums/{album.Name}/{pictureName}";
                             picture.CreateTime = DateTime.Now;
                             context.Pictures.Add(picture);
                             album.Lines.Add(new AlbumPictureLine() { Picture = picture });
@@ -211,9 +214,8 @@ namespace NetCoreWeb.Areas.Photo.Controllers
             }
         }
 
-
-
-        public ViewResult DeletePhoto(int albumId,int albumPictureLineId)//软删除
+        //软删除指定相册的单张图片
+        public IActionResult DeletePhoto(int albumId,int albumPictureLineId)//软删除
         {
             bool isDelSucess = false;
             var album = repository.Albums.FirstOrDefault(a => a.AlbumID == albumId);
@@ -227,9 +229,10 @@ namespace NetCoreWeb.Areas.Photo.Controllers
                     context.SaveChanges();
                 }
             }
-            return View();
+            return RedirectToAction(nameof(Album), new { albumID = albumId });
         }
-        public ViewResult DeletePhotoCompletely(int albumId, int albumPictureLineId)
+        //彻底删除指定相册的单张图片
+        public IActionResult DeletePhotoCompletely(int albumId, int albumPictureLineId)
         {
             bool isDelSucess = false;
             var album = repository.Albums.FirstOrDefault(a => a.AlbumID == albumId);
@@ -238,15 +241,17 @@ namespace NetCoreWeb.Areas.Photo.Controllers
                 var matchedPhoto = album.Lines.FirstOrDefault(p => p.AlbumPictureLineID == albumPictureLineId);
                 if (matchedPhoto != null)
                 {
-                    album.Lines.Remove(matchedPhoto);
-                    var filePath = hostingEnv.WebRootPath + $@"\Files\Pictures\Albums\{album.Name}\{matchedPhoto.Picture.PictureName}";
+                    var filePath = hostingEnv.WebRootPath + $@"\Files\Pictures{matchedPhoto.Picture.PictureName.Replace("/", @"\")}";
+                    context.AlbumPictureLine.Remove(matchedPhoto);                    
+                    //删除磁盘文件                    
                     System.IO.File.Delete(filePath);
-                    //Directory.Delete(filePath, true);
+                    context.Pictures.Remove(matchedPhoto.Picture);
                     context.SaveChanges();
                 }
             }
-            return View();
+            return RedirectToAction(nameof(Album), new { albumID = albumId });
         }
+
         /// <summary>
         /// 保存上传的图片
         /// </summary>

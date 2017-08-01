@@ -3,56 +3,30 @@
     ViewData["Title"] = "Album";
 }
 <h2 class="center-block">@Model.Name</h2>
+<strong><a asp-action="UploadPhoto" asp-route-albumId=@Model.AlbumID>UploadPhoto</a></strong>
 <div class="row">
     @foreach (var p in Model.Lines)
     {
         <div class="well col-md-4">            
             <a href="#" class="thumbnail">
-                <img src="/Albums/@Model.Name/@p.Picture.PictureName" alt="Albums" />
+                <img src="@p.Picture.PictureName" alt="Albums" />
             </a>
-            <h3>
-                @*<strong>@Model.Name</strong>*@
+            <div>
                 <a class="btn btn-sm btn-primary" href="#">Edit</a>
-                <a class="btn btn-sm btn-warning pull-right" asp-action="DeletePhoto" asp-route-albumId=@Model.AlbumID asp-route-albumPictureLineId=@p.AlbumPictureLineID>Del</a>
-            </h3>
+                <div class="dropdown pull-right">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Delete
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a class="btn btn-sm" asp-action="DeletePhoto" asp-route-albumId=@Model.AlbumID asp-route-albumPictureLineId=@p.AlbumPictureLineID>删除</a></li>
+                        <li><a class="btn btn-sm" asp-action="DeletePhotoCompletely" asp-route-albumId=@Model.AlbumID asp-route-albumPictureLineId=@p.AlbumPictureLineID>彻底删除</a></li>                        
+                    </ul>
+                </div>
+                @*<a class="btn btn-sm btn-warning pull-right" asp-action="DeletePhoto" asp-route-albumId=@Model.AlbumID asp-route-albumPictureLineId=@p.AlbumPictureLineID>Del</a>
+                <a class="btn btn-sm btn-warning pull-right" asp-action="DeletePhotoCompletely" asp-route-albumId=@Model.AlbumID asp-route-albumPictureLineId=@p.AlbumPictureLineID>DelCompletely</a>*@            
+            </div>
         </div>
     }
 </div>
-
-@*<form asp-action="Edit" method="post" enctype="multipart/form-data">
-    <input type="hidden" asp-for="AlbumID" />
-    <div class="form-group">
-        <label>Image</label>
-        <input type="file" name="files" class="file" style="margin:0px 0px 10px 0px" multiple />
-    </div>
-    <div class="form-group">
-        <label asp-for="Name"></label>
-        <div><span asp-validation-for="Name" class="text-danger"></span></div>
-        <input asp-for="Name" class="form-control" />
-    </div>*@
-    @*<div class="form-group">
-        <label asp-for="Description"></label>
-        <div><span asp-validation-for="Description" class="text-danger"></span></div>
-        <textarea asp-for="Description" class="form-control"></textarea>
-    </div>
-    <div class="form-group">
-        <label asp-for="Category"></label>
-        <div><span asp-validation-for="Category" class="text-danger"></span></div>
-        <input asp-for="Category" class="form-control" />
-    </div>*@
-    @*<div class="form-group">
-        <label asp-for="Remark"></label>
-        <div><span asp-validation-for="Remark" class="text-danger"></span></div>
-        <input asp-for="Remark" class="form-control" />
-    </div>*@
-    @*<div class="checkbox">
-        <label>
-            <input asp-for="Disabled" /> 删除此菜
-        </label>
-    </div>*@
-    @*<div class="form-group">
-        <button class="btn btn-primary" type="submit">Save</button>
-        <a asp-action="Index" class="btn btn-default">Cancel</a>
-    </div>
-</form>*@ 
 

@@ -12,7 +12,7 @@
                 <a asp-action="Create" asp-controller="Comment" asp-route-area="" class="btn btn-sm btn-primary pull-right" asp-route-productId="@Model.AlbumID">Like?</a>
             </h4>
             <a href="#" class="thumbnail">
-                <img src="/Albums/@Model.Name/@p.Picture.PictureName" alt="Albums" />
+                <img src="@p.Picture.PictureName" alt="Albums"/>
             </a>
         </div>
     }

@@ -14,7 +14,15 @@
                     </h2>
                     <div class="post-featured-image">
                         <a class="thumbnail" asp-action="Album" asp-route-albumId="@a.AlbumID">
-                            <img src="http://image.youzhan.org/a/e1/e235a09426f32cc5b31a0a7ec3109.png!thumb" width="700" height="438" alt="ShootByHui" onload="imgLoaded(this)">
+                            @{
+                                string imgSrc = "http://image.youzhan.org/a/e1/e235a09426f32cc5b31a0a7ec3109.png!thumb";
+                                if (a.Lines != null && a.Lines.Count > 0)
+                                {
+                                    imgSrc = a.Lines.FirstOrDefault().Picture.PictureName;
+                                }
+                                <img src=@imgSrc width="700" height="438" alt="ShootByHui" onload="imgLoaded(this)">
+                            }
+                            <img src=@imgSrc width="700" height="438" alt="ShootByHui" onload="imgLoaded(this)">
                         </a>
                     </div>
                 </article>

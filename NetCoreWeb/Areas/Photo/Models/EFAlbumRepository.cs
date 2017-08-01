@@ -39,7 +39,8 @@ namespace NetCoreWeb.Areas.Photo.Models
         {
             Album dbEntry = context.Albums.FirstOrDefault(a => a.AlbumID == albumID);
             if (dbEntry != null)
-            {
+             {                
+                context.AlbumPictureLine.RemoveRange(Albums.FirstOrDefault(a => a.AlbumID == albumID).Lines);
                 context.Albums.Remove(dbEntry);
                 context.SaveChanges();
             }

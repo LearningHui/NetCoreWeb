@@ -1,4 +1,4 @@
-@model Album
+﻿@model Album
 @{
     ViewData["Title"] = "UploadPhoto";
 }
@@ -14,5 +14,9 @@
       method="post"
       enctype="multipart/form-data">
     <input type="file" name="files" class="file" style="margin:0px 0px 10px 0px" multiple />
-    <input type="submit" class="btn btn-primary" value="Upload Selected Files" />
+    <div class="form-group">
+        <input type="submit" class="btn btn-primary" value="Upload Selected Files" />
+        <a asp-action="Album" asp-route-albumId=@Model.AlbumID class="btn btn-default">查看</a>
+    </div>
+    
 </form>
