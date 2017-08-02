@@ -297,11 +297,35 @@ namespace NetCoreWeb.Areas.Photo.Controllers
 
         public IActionResult ReadPhotoInfo()
         {
-            var filePath = hostingEnv.WebRootPath + $@"\Files\Pictures\Dishes\6d8343a4-31b2-4b08-8f30-59a65a29f417.JPG";
+            var filePath = hostingEnv.WebRootPath + $@"\Files\Pictures\Dishes\hongshaorou.JPG";
             MagickImageInfo info = new MagickImageInfo(filePath);
             using (MagickImage image = new MagickImage(filePath))
             {
-                image.Scale(new Percentage(60));
+                ExifProfile profile = image.GetExifProfile();
+                if (profile == null)
+                    Console.WriteLine("Image does not contain exif information.");
+                else
+                {
+                    // Write all values to the console
+                    foreach (ExifValue value in profile.Values)
+                    {
+                        Console.WriteLine("{0}({1}): {2}", value.Tag, value.DataType, value.ToString());
+                        string sstr = string.Format("{0}({1}): {2}", value.Tag, value.DataType, value.ToString());
+                    }
+                    //var filePathOutputThubnail = hostingEnv.WebRootPath + $@"\Files\Pictures\Dishes\outputimgThubnail.JPG";
+                    //profile.CreateThumbnail().Write(filePathOutputThubnail);
+                }
+
+                //image.Scale(new Percentage(60));
+                if(image.Width>1080)
+                {
+                    var filePathOutput1080 = hostingEnv.WebRootPath + $@"\Files\Pictures\Dishes\outputimg1080.JPG";
+                    var filePathOutput768 = hostingEnv.WebRootPath + $@"\Files\Pictures\Dishes\outputimg768.JPG";
+                    image.Scale(768, (image.Height / image.Height) * 768);
+
+                    //image.Scale(1080, (image.Height / image.Height) * 1080);
+                }
+                
                 var filePathOutput = hostingEnv.WebRootPath + $@"\Files\Pictures\Dishes\outputimg.JPG";
 
                 image.Write(filePathOutput);
