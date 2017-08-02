@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Net.Http.Headers;
 using System.IO;
+using ImageMagick;
 
 namespace NetCoreWeb.Areas.Photo.Controllers
 {
@@ -292,6 +293,20 @@ namespace NetCoreWeb.Areas.Photo.Controllers
             {
                 return null;
             }
+        }
+
+        public IActionResult ReadPhotoInfo()
+        {
+            var filePath = hostingEnv.WebRootPath + $@"\Files\Pictures\Dishes\6d8343a4-31b2-4b08-8f30-59a65a29f417.JPG";
+            MagickImageInfo info = new MagickImageInfo(filePath);
+            using (MagickImage image = new MagickImage(filePath))
+            {
+                image.Scale(new Percentage(60));
+                var filePathOutput = hostingEnv.WebRootPath + $@"\Files\Pictures\Dishes\outputimg.JPG";
+
+                image.Write(filePathOutput);
+            }
+            return View();
         }
     }
 }
