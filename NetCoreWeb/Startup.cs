@@ -73,7 +73,7 @@ namespace NetCoreWeb
             services.AddMvc();
             services.AddMemoryCache();
             services.AddSession();
-            if(appName == AppName.UperHui)
+            if (appName == AppName.UperHui)
             {
                 services.AddDbContext<SuperHuiDbContext>(options => options.UseSqlServer(Configuration["Data:SuperHui:ConnectionString"]));
                 services.AddTransient<ICommentRepository, EFCommentRepository>();
@@ -96,7 +96,7 @@ namespace NetCoreWeb
                 services.AddTransient<ITicketRepository, EFTicketRepository>();
                 services.AddScoped<TicketCart>(tc => SessionTicketCart.GetCart(tc));
                 services.AddTransient<ITicketOrderRepository, EFTicketOrderRepository>();
-            } 
+            }
             #endregion
         }
 
@@ -110,22 +110,27 @@ namespace NetCoreWeb
             app.UseExceptionHandler("/Error/Error");
 
             app.UseStaticFiles();
-            app.UseStaticFiles(new StaticFileOptions()
-            {
-                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot/Files/Pictures")),
-                RequestPath = new PathString("/Pictures")
-            });
+            //app.UseStaticFiles(new StaticFileOptions()
+            //{
+            //    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot/Files/Pictures")),
+            //    RequestPath = new PathString("/Pictures")
+            //});
             app.UseStaticFiles(new StaticFileOptions()//烹饪菜品图片文件
             {
                 FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot/Files/Pictures/Dishes")),
                 RequestPath = new PathString("/Dishes")
             });
-            app.UseDirectoryBrowser(new DirectoryBrowserOptions()//文件目录浏览（危险，默认禁止启用）
+            app.UseStaticFiles(new StaticFileOptions()//摄影图片文件
             {
-                FileProvider = new PhysicalFileProvider(
-                Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot/Files/Pictures")),
-                RequestPath = new PathString("/Pictures")
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot/Files/Pictures/Albums")),
+                RequestPath = new PathString("/Albums")
             });
+            //app.UseDirectoryBrowser(new DirectoryBrowserOptions()//文件目录浏览（危险，默认禁止启用）
+            //{
+            //    FileProvider = new PhysicalFileProvider(
+            //    Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot/Files/Pictures")),
+            //    RequestPath = new PathString("/Pictures")
+            //});
             app.UseSession();
             app.UseIdentity();
             app.UseMvc(routes =>
@@ -135,7 +140,7 @@ namespace NetCoreWeb
                 routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
             });
             // Shows UseCors with named policy.
-            app.UseCors("AllowSpecificOrigin");            
+            app.UseCors("AllowSpecificOrigin");
             IdentitySeedData.EnsurePopulated(app);
         }
         //used in develpment envirenment
@@ -176,7 +181,7 @@ namespace NetCoreWeb
             {
                 routes.MapRoute(name: "Error", template: "Error", defaults: new { controller = "Error", action = "Error" });
                 if (appName == AppName.SportsStroe)
-                {                    
+                {
                     routes.MapRoute(name: null, template: "{category}/Page{page:int}", defaults: new { controller = "Product", action = "List" });
                     routes.MapRoute(name: null, template: "Page{page:int}", defaults: new { controller = "Product", action = "List", page = 1 });
                     routes.MapRoute(name: null, template: "{category}", defaults: new { controller = "Product", action = "List", page = 1 });
@@ -185,7 +190,6 @@ namespace NetCoreWeb
                 }
                 else
                 {
-                    routes.MapRoute(name: null, template: "Album/{AlbumName}", defaults: new { area ="Photo", controller = "Album", action = "Gallery" });
                     routes.MapRoute(name: "areas", template: "{area:exists}/{controller=Home}/{action=Index}");
                     routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
                 }
