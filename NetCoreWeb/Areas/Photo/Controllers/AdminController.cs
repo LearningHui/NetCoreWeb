@@ -321,15 +321,21 @@ namespace NetCoreWeb.Areas.Photo.Controllers
                 {
                     var filePathOutput1080 = hostingEnv.WebRootPath + $@"\Files\Pictures\Dishes\outputimg1080.JPG";
                     var filePathOutput768 = hostingEnv.WebRootPath + $@"\Files\Pictures\Dishes\outputimg768.JPG";
-                    image.Scale(768, (image.Height / image.Height) * 768);
+                    //image.Scale(768, (image.Height / image.Height) * 768);
+                    image.Sample(768, (image.Height / image.Height) * 768);
+                    //image.Resize(768, (image.Height / image.Height) * 768);
 
                     //image.Scale(1080, (image.Height / image.Height) * 1080);
                 }
-                
-                var filePathOutput = hostingEnv.WebRootPath + $@"\Files\Pictures\Dishes\outputimg.JPG";
+
+                var filePathOutput = hostingEnv.WebRootPath + $@"\Files\Pictures\Dishes\outputimgSample.JPG";
 
                 image.Write(filePathOutput);
             }
+            return View();
+        }
+        public ViewResult Calculate()
+        {
             return View();
         }
     }

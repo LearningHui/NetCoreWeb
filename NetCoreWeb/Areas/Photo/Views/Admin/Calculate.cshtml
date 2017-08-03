@@ -1,0 +1,98 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>攻城狮特训营考试答卷</title>
+    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <style>
+        .form-signin {
+            max-width: 330px;
+            padding: 15px;
+            margin: 0 auto;
+        }
+
+        .round-head {
+            border:2px solid;
+            width: 100px;
+            height: 100px;
+            background-image: url("/albums/head.jpg");
+            background-size: cover;
+            display: block;
+            border-radius: 50px;
+            -webkit-border-radius:100px;
+            -moz-border-radius:100px;
+        }
+    </style>
+    <script type="text/javascript">
+        function calculate() {
+            var v = document.getElementById("express").value;
+            document.getElementById("calcuResult").value = eval(v);
+        }
+    </script>
+</head>
+<body>
+
+    <div class="container body-content">
+        <div class="container">
+            <div class="text-center">
+                <h5>大家好，我是小辉辉</h5>
+            </div>
+            <div class="round-head center-block">
+                @*<img src="/albums/head.jpg"/>*@
+            </div>
+            <form method="post" class="form-signin">
+
+                <input type="hidden" />
+                <div class="form-group">
+                    <label>表达式：</label>
+                    <input id="express" placeholder="请输入计算内容" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>结果</label>
+
+                    <input id="calcuResult" placeholder="计算结果" class="form-control" />
+                </div>
+                <button class="btn btn-primary fa-street-view" type="button" onclick="calculate()">计算</button>
+            </form>
+        </div>
+        <hr />        
+    </div>    
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
