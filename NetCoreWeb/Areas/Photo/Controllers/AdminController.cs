@@ -280,16 +280,37 @@ namespace NetCoreWeb.Areas.Photo.Controllers
                 }
                 fileName = Guid.NewGuid() + "." + suffix;
                 string fileFullName = filePath + fileName;
-                using (FileStream fs = System.IO.File.Create(fileFullName))
+                string thumbnailFullName = fileFullName.Insert(fileFullName.LastIndexOf("."), "-thumbnail");
+                using (MagickImage mi = new MagickImage(file.OpenReadStream()))
                 {
-                    file.CopyTo(fs);
-                    fs.Flush();
+                    bool wBiger = mi.Width > mi.Height ? true : false;//图片宽是否大于高
+                    int scaleNum = 1080;
+                    int thumbnailNum = 100;
+                    if (mi.Width > scaleNum)
+                    {
+                        if (wBiger)
+                            mi.Scale(scaleNum, 0);//高度指定0代表其自适应图片宽度
+                        else
+                            mi.Scale(0, scaleNum);
+                    }
+                    mi.Write(fileFullName);//缩放原图
+                    //生成缩略图
+                    if (wBiger)
+                        mi.Scale(thumbnailNum, 0);//高度指定0代表其自适应图片宽度
+                    else
+                        mi.Scale(0, thumbnailNum);
+                    mi.Write(thumbnailFullName);
                 }
+                //using (FileStream fs = System.IO.File.Create(fileFullName))
+                //{
+                //    //file.CopyTo(fs);
+                //    //fs.Flush();                
+                //}
                 size += file.Length;
                 return fileName;
             }
 
-            catch (Exception)
+            catch (Exception ex)
             {
                 return null;
             }
@@ -322,7 +343,7 @@ namespace NetCoreWeb.Areas.Photo.Controllers
                     var filePathOutput1080 = hostingEnv.WebRootPath + $@"\Files\Pictures\Dishes\outputimg1080.JPG";
                     var filePathOutput768 = hostingEnv.WebRootPath + $@"\Files\Pictures\Dishes\outputimg768.JPG";
                     //image.Scale(768, (image.Height / image.Height) * 768);
-                    image.Sample(768, (image.Height / image.Height) * 768);
+                    //image.Sample(768, (image.Height / image.Height) * 768);
                     //image.Resize(768, (image.Height / image.Height) * 768);
 
                     //image.Scale(1080, (image.Height / image.Height) * 1080);

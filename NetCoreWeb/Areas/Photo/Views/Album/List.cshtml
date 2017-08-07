@@ -16,12 +16,15 @@
                         <a class="thumbnail" asp-action="Album" asp-route-albumId="@a.AlbumID">
                             @{
                                 string imgSrc = "http://image.youzhan.org/a/e1/e235a09426f32cc5b31a0a7ec3109.png!thumb";
+                                string imagThumbnail = "";
                                 if (a.Lines != null && a.Lines.Count > 0)
                                 {
-                                    imgSrc = a.Lines.FirstOrDefault(p => p.Delete == false).Picture.PictureName;
+                                    imgSrc = a.Lines.FirstOrDefault().Picture.PictureName;
+                                    imagThumbnail = a.Lines.FirstOrDefault().Picture.ThumbnailName;
                                 }
-                                <img src=@imgSrc width="700" height="438" alt="ShootByHui" onload="imgLoaded(this)">
+                                <img src=@imgSrc lowsrc="@imagThumbnail" width="700" height="438" alt="ShootByHui" onload="imgLoaded(this)">
                             }
+                            <img src=@imgSrc width="700" height="438" alt="ShootByHui" onload="imgLoaded(this)">
                         </a>
                     </div>
                 </article>
