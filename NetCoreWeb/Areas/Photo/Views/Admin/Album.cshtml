@@ -9,7 +9,16 @@
     {
         <div class="well col-md-4">            
             <a href="#" class="thumbnail">
-                <img src="@p.Picture.PictureName" lowsrc="@p.Picture.ThumbnailName" style="width:100%;" alt="Albums" />
+                @*<img src="@p.Picture.PictureName" lowsrc="@p.Picture.ThumbnailName" style="width:100%;" alt="Albums" />*@
+                @{
+                    string srcsetData = "";
+                    srcsetData += p.Picture.GetRateName("4x") + " 4x, ";
+                    srcsetData += p.Picture.GetRateName("3x") + " 3x, ";
+                    srcsetData += p.Picture.GetRateName("2x") + " 2x, ";
+                    srcsetData += p.Picture.GetRateName("1x") + " 1x";
+                }
+                <img src="@p.Picture.GetRateName("1x")" srcset="@srcsetData" alt="Albums"/>
+
             </a>
             <div>
                 <a class="btn btn-sm btn-primary" href="#">Edit</a>

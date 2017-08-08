@@ -10,22 +10,28 @@
             <div class="col-xs-12 col-sm-6">
                 <article class="post tag-chinese-website tag-bootstrap-v3">
                     <h2 class="post-title">
-                        <a href="/circleci/">@a.Name</a>
+                        <a href="#">@a.Name</a>
                     </h2>
                     <div class="post-featured-image">
                         <a class="thumbnail" asp-action="Album" asp-route-albumId="@a.AlbumID">
-                            @{
-                                string imgSrc = "http://image.youzhan.org/a/e1/e235a09426f32cc5b31a0a7ec3109.png!thumb";
-                                string imagThumbnail = "";
-                                if (a.Lines != null && a.Lines.Count > 0)
-                                {
-                                    imgSrc = a.Lines.FirstOrDefault().Picture.PictureName;
-                                    imagThumbnail = a.Lines.FirstOrDefault().Picture.ThumbnailName;
-                                }
-                                <img src=@imgSrc lowsrc="@imagThumbnail" width="700" height="438" alt="ShootByHui" onload="imgLoaded(this)">
+                           @{
+                            string imgSrc = "http://image.youzhan.org/a/e1/e235a09426f32cc5b31a0a7ec3109.png!thumb";
+                            string srcsetData = "";
+                            if (a.Lines != null && a.Lines.Count > 0)
+                            {
+                                var pic = a.Lines.FirstOrDefault().Picture;
+                                imgSrc = pic.GetRateName("1x");
+
+                                srcsetData += pic.GetRateName("4x") + " 4x, ";
+                                srcsetData += pic.GetRateName("3x") + " 3x, ";
+                                srcsetData += pic.GetRateName("2x") + " 2x, ";
+                                srcsetData += pic.GetRateName("1x") + " 1x";
+
                             }
-                            <img src=@imgSrc width="700" height="438" alt="ShootByHui" onload="imgLoaded(this)">
-                        </a>
+
+                            <img src="@imgSrc" srcset="@srcsetData" width="700" height="438" alt="ShootByHui" onload="imgLoaded(this)">
+                        }
+                        </a>                        
                     </div>
                 </article>
             </div>

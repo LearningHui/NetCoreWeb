@@ -243,9 +243,18 @@ namespace NetCoreWeb.Areas.Photo.Controllers
                 if (matchedPhoto != null)
                 {
                     var filePath = hostingEnv.WebRootPath + $@"\Files\Pictures{matchedPhoto.Picture.PictureName.Replace("/", @"\")}";
-                    context.AlbumPictureLine.Remove(matchedPhoto);                    
-                    //删除磁盘文件                    
-                    System.IO.File.Delete(filePath);
+                    context.AlbumPictureLine.Remove(matchedPhoto);
+                    //删除磁盘文件   
+                    if(System.IO.File.Exists(filePath))//删除原图
+                        System.IO.File.Delete(filePath);
+                    if (System.IO.File.Exists(filePath.Insert(filePath.LastIndexOf("."), "-1x")))//删除1倍图
+                        System.IO.File.Delete(filePath.Insert(filePath.LastIndexOf("."), "-1x"));
+                    if (System.IO.File.Exists(filePath.Insert(filePath.LastIndexOf("."), "-2x")))//删除2倍图
+                        System.IO.File.Delete(filePath.Insert(filePath.LastIndexOf("."), "-2x"));
+                    if (System.IO.File.Exists(filePath.Insert(filePath.LastIndexOf("."), "-3x")))//删除3倍图
+                        System.IO.File.Delete(filePath.Insert(filePath.LastIndexOf("."), "-3x"));
+                    if (System.IO.File.Exists(filePath.Insert(filePath.LastIndexOf("."), "-4x")))//删除4倍图
+                        System.IO.File.Delete(filePath.Insert(filePath.LastIndexOf("."), "-4x"));
                     context.Pictures.Remove(matchedPhoto.Picture);
                     context.SaveChanges();
                 }
@@ -280,26 +289,62 @@ namespace NetCoreWeb.Areas.Photo.Controllers
                 }
                 fileName = Guid.NewGuid() + "." + suffix;
                 string fileFullName = filePath + fileName;
-                string thumbnailFullName = fileFullName.Insert(fileFullName.LastIndexOf("."), "-thumbnail");
+                string fileFullName1x = fileFullName.Insert(fileFullName.LastIndexOf("."), "-1x");
+                string fileFullName2x = fileFullName.Insert(fileFullName.LastIndexOf("."), "-2x");
+                string fileFullName3x = fileFullName.Insert(fileFullName.LastIndexOf("."), "-3x");
+                string fileFullName4x = fileFullName.Insert(fileFullName.LastIndexOf("."), "-4x");
+                //string thumbnailFullName = fileFullName.Insert(fileFullName.LastIndexOf("."), "-thumbnail");
                 using (MagickImage mi = new MagickImage(file.OpenReadStream()))
                 {
                     bool wBiger = mi.Width > mi.Height ? true : false;//图片宽是否大于高
-                    int scaleNum = 1080;
-                    int thumbnailNum = 100;
-                    if (mi.Width > scaleNum)
+                    //int scaleNum = 1080;
+                    //int thumbnailNum = 100;
+                    if(wBiger)
                     {
-                        if (wBiger)
-                            mi.Scale(scaleNum, 0);//高度指定0代表其自适应图片宽度
-                        else
-                            mi.Scale(0, scaleNum);
+                        if(mi.Width>1080)
+                        {
+                            mi.Scale(1080, 0);
+                            mi.Write(fileFullName4x);
+                        }
+                        if(mi.Width>720)
+                        {
+                            mi.Scale(720, 0);
+                            mi.Write(fileFullName3x);
+                        }
+                        if(mi.Width>480)
+                        {
+                            mi.Scale(480, 0);
+                            mi.Write(fileFullName2x);
+                        }
+                        if(mi.Width>320)
+                        {
+                            mi.Scale(320, 0);
+                            mi.Write(fileFullName1x);
+                        }
                     }
-                    mi.Write(fileFullName);//缩放原图
-                    //生成缩略图
-                    if (wBiger)
-                        mi.Scale(thumbnailNum, 0);//高度指定0代表其自适应图片宽度
                     else
-                        mi.Scale(0, thumbnailNum);
-                    mi.Write(thumbnailFullName);
+                    {
+                        if (mi.Height > 1080)
+                        {
+                            mi.Scale(0, 1080);
+                            mi.Write(fileFullName4x);
+                        }
+                        if (mi.Height > 720)
+                        {
+                            mi.Scale(0, 720);
+                            mi.Write(fileFullName3x);
+                        }
+                        if (mi.Height > 480)
+                        {
+                            mi.Scale(0, 480);
+                            mi.Write(fileFullName2x);
+                        }
+                        if (mi.Height > 320)
+                        {
+                            mi.Scale(0, 320);
+                            mi.Write(fileFullName1x);
+                        }
+                    }                                       
                 }
                 //using (FileStream fs = System.IO.File.Create(fileFullName))
                 //{
