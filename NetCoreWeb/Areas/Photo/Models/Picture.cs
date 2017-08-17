@@ -25,11 +25,11 @@ namespace NetCoreWeb.Areas.Photo.Models
         /// <summary>
         /// 获取不同倍率图的路径
         /// </summary>
-        /// <param name="rate">图片倍率：1x,2x,3x,4x</param>
+        /// <param name="width">图片宽度</param>
         /// <returns></returns>
-        public string GetRateName(string rate)
+        public string GetRatePicName(int width)
         {
-            return PictureName.Insert(PictureName.LastIndexOf("."), "-" + rate);
+            return PictureName.Insert(PictureName.LastIndexOf("."), "-w" + width);
         }
     }
     public class AlbumPictureLine

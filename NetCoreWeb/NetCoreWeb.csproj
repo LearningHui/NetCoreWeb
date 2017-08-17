@@ -50,6 +50,9 @@
     <Folder Include="Areas\Bus\Views\Cart\" />
     <Folder Include="Areas\Photo\Controllers\" />
     <Folder Include="Areas\SportsStore\Views\Account\" />
+    <Folder Include="Areas\Test\Controllers\" />
+    <Folder Include="Areas\Test\Models\" />
+    <Folder Include="Areas\Test\Views\Html\" />
     <Folder Include="Views\Pictures\" />
     <Folder Include="Areas\SportsStore\Views\Admin\" />
     <Folder Include="Views\Error\" />

@@ -289,62 +289,52 @@ namespace NetCoreWeb.Areas.Photo.Controllers
                 }
                 fileName = Guid.NewGuid() + "." + suffix;
                 string fileFullName = filePath + fileName;
-                string fileFullName1x = fileFullName.Insert(fileFullName.LastIndexOf("."), "-1x");
-                string fileFullName2x = fileFullName.Insert(fileFullName.LastIndexOf("."), "-2x");
-                string fileFullName3x = fileFullName.Insert(fileFullName.LastIndexOf("."), "-3x");
-                string fileFullName4x = fileFullName.Insert(fileFullName.LastIndexOf("."), "-4x");
-                //string thumbnailFullName = fileFullName.Insert(fileFullName.LastIndexOf("."), "-thumbnail");
+                string fileFullName640= fileFullName.Insert(fileFullName.LastIndexOf("."), "-w640");
+                //string fileFullName2x = fileFullName.Insert(fileFullName.LastIndexOf("."), "-2x");
+                //string fileFullName3x = fileFullName.Insert(fileFullName.LastIndexOf("."), "-3x");
+                //string fileFullName4x = fileFullName.Insert(fileFullName.LastIndexOf("."), "-4x");
+                string thumbnailFullName = fileFullName.Insert(fileFullName.LastIndexOf("."), "-thumbnail");
                 using (MagickImage mi = new MagickImage(file.OpenReadStream()))
                 {
-                    bool wBiger = mi.Width > mi.Height ? true : false;//图片宽是否大于高
-                    //int scaleNum = 1080;
-                    //int thumbnailNum = 100;
-                    if(wBiger)
-                    {
-                        if(mi.Width>1080)
-                        {
-                            mi.Scale(1080, 0);
-                            mi.Write(fileFullName4x);
-                        }
-                        if(mi.Width>720)
-                        {
-                            mi.Scale(720, 0);
-                            mi.Write(fileFullName3x);
-                        }
-                        if(mi.Width>480)
-                        {
-                            mi.Scale(480, 0);
-                            mi.Write(fileFullName2x);
-                        }
-                        if(mi.Width>320)
-                        {
-                            mi.Scale(320, 0);
-                            mi.Write(fileFullName1x);
-                        }
-                    }
-                    else
-                    {
-                        if (mi.Height > 1080)
-                        {
-                            mi.Scale(0, 1080);
-                            mi.Write(fileFullName4x);
-                        }
-                        if (mi.Height > 720)
-                        {
-                            mi.Scale(0, 720);
-                            mi.Write(fileFullName3x);
-                        }
-                        if (mi.Height > 480)
-                        {
-                            mi.Scale(0, 480);
-                            mi.Write(fileFullName2x);
-                        }
-                        if (mi.Height > 320)
-                        {
-                            mi.Scale(0, 320);
-                            mi.Write(fileFullName1x);
-                        }
-                    }                                       
+                    //保存原图
+                    mi.Write(fileFullName);
+                    //裁剪不同尺寸的图片（统一宽度640px）
+                    mi.Scale(640, 0);
+                    mi.Write(fileFullName640);
+                    //缩略图（宽度100px）
+                    mi.Scale(100, 0);
+                    mi.Write(thumbnailFullName);
+
+                    #region Old
+                    //bool wBiger = mi.Width > mi.Height ? true : false;//图片宽是否大于高   
+
+                    //if(wBiger)
+                    //{
+                    //    if(mi.Width>1080)
+                    //    {
+                    //        mi.Scale(1080, 0);
+                    //        mi.Write(fileFullName4x);
+                    //    }
+                    //    if(mi.Width>720)
+                    //    {
+                    //        mi.Scale(720, 0);
+                    //        mi.Write(fileFullName3x);
+                    //    }                        
+                    //}
+                    //else
+                    //{
+                    //    if (mi.Height > 1080)
+                    //    {
+                    //        mi.Scale(0, 1080);
+                    //        mi.Write(fileFullName4x);
+                    //    }
+                    //    if (mi.Height > 720)
+                    //    {
+                    //        mi.Scale(0, 720);
+                    //        mi.Write(fileFullName3x);
+                    //    }
+                    //}  
+                    #endregion
                 }
                 //using (FileStream fs = System.IO.File.Create(fileFullName))
                 //{
