@@ -16,20 +16,20 @@
                         <a class="thumbnail" asp-action="Album" asp-route-albumId="@a.AlbumID">
                             @{
                                 string imgSrc = "http://image.youzhan.org/a/e1/e235a09426f32cc5b31a0a7ec3109.png!thumb";
-                                string srcsetData = "";
+                                //string srcsetData = "";
                                 if (a.Lines != null && a.Lines.Count > 0)
                                 {
                                     var pic = a.Lines.FirstOrDefault().Picture;
-                                    imgSrc = pic.GetRateName("1x");
-
-                                    srcsetData += pic.GetRateName("4x") + " 4x, ";
-                                    srcsetData += pic.GetRateName("3x") + " 3x, ";
-                                    srcsetData += pic.GetRateName("2x") + " 2x, ";
-                                    srcsetData += pic.GetRateName("1x") + " 1x";
+                                    imgSrc = pic.GetRatePicName(640);
+                                    //imgSrc = pic.GetRateName("1x");
+                                    //srcsetData += pic.GetRateName("4x") + " 4x, ";
+                                    //srcsetData += pic.GetRateName("3x") + " 3x, ";
+                                    //srcsetData += pic.GetRateName("2x") + " 2x, ";
+                                    //srcsetData += pic.GetRateName("1x") + " 1x";
 
                                 }
 
-                                <img src="@imgSrc" srcset="@srcsetData" width="700" height="438" alt="ShootByHui" onload="imgLoaded(this)">
+                                <img src="@imgSrc" s width="700" height="438" alt="ShootByHui" onload="imgLoaded(this)">
                             }
                         </a>
 
