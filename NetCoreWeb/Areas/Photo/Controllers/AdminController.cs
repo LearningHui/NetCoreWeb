@@ -204,6 +204,11 @@ namespace NetCoreWeb.Areas.Photo.Controllers
                         }
                     }
                 }
+                else
+                {
+                    TempData["message"] = $"上传张照片到{album.Name}失败！";
+                    return View(album);
+                }
                 context.SaveChanges();
                 TempData["message"] = $"成功上传 {files.Count()}张照片到{album.Name}";
                 return View(album);
@@ -388,10 +393,6 @@ namespace NetCoreWeb.Areas.Photo.Controllers
 
                 image.Write(filePathOutput);
             }
-            return View();
-        }
-        public ViewResult Calculate()
-        {
             return View();
         }
     }

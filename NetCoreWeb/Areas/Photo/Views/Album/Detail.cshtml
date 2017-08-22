@@ -1,7 +1,14 @@
-@{
+﻿@{
     ViewData["Title"] = "Detail";
 }
 
-<h2>Detail</h2>
+<article style="margin-bottom:10px;">
+    <h3>参数：</h3>
+    <span>@ViewData["Model"].ToString() &nbsp;</span>
+    <span>f</span><span>@ViewData["FNumber"].ToString() &nbsp;</span>
+    <span>@ViewData["ExposureTime"].ToString()</span><span>s &nbsp;</span>
+    <span>@ViewData["FocalLength"].ToString()</span><span>mm</span>
+</article>
 <img src="@Model" style="width:100%" alt="Albums" />
+
 
