@@ -15,7 +15,7 @@
                 <strong>@Model.Name</strong>
                 <a asp-action="Create" asp-controller="Comment" asp-route-area="" class="btn btn-sm btn-primary pull-right" asp-route-productId="@Model.AlbumID">Like?</a>
             </h4>
-            <a href="#" class="thumbnail">
+            <a asp-controller="Album" asp-action="Detail" asp-route-photoSrc="@p.Picture.GetRatePicName(640)" class="thumbnail">
                 @*@{
                     string srcsetData = "";
                     srcsetData += p.Picture.GetRateName("4x") + " 4x, ";

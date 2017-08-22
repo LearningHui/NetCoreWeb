@@ -36,7 +36,7 @@ namespace NetCoreWeb.Areas.Photo.Controllers
             {
                 Albums = repository.Albums
                 .Where(p => category == null || p.Category == category)
-                .OrderBy(p => p.AlbumID).Reverse()
+                .OrderBy(p => p.CreateTime).Reverse()
                 .Skip((page - 1) * PageSize)
                 .Take(PageSize),
 

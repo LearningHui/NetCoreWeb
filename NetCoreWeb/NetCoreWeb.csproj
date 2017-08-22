@@ -16,7 +16,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="wwwroot\css\bootstrap.css" />
+    <Content Include="wwwroot\css\oldsite.css" />
+    <Content Include="wwwroot\css\oldsite.min.css" />
     <Content Include="wwwroot\css\signin.css" />
+    <Content Include="wwwroot\css\site.css" />
+    <Content Include="wwwroot\css\site.min.css" />
     <Content Include="wwwroot\files\pictures\albums\十渡漂流\7291db19-560c-4fb3-97a6-5c0ac3e4b7bd.jpg" />
     <Content Include="wwwroot\files\pictures\albums\十渡漂流\d271e797-fcf1-49d4-b951-248f37bfdce1.jpg" />
     <Content Include="wwwroot\files\pictures\albums\欧洲十国游\8a30caf2-1e7d-416f-9642-2ae2254b52dc.jpg" />

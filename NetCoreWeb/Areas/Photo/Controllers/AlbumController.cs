@@ -30,7 +30,7 @@ namespace NetCoreWeb.Areas.Photo.Controllers
             {
                 Albums = repository.Albums
                 .Where(p => category == null || p.Category == category)
-                .OrderBy(p => p.AlbumID).Reverse()
+                .OrderBy(p => p.CreateTime).Reverse()
                 .Skip((page - 1) * PageSize)
                 .Take(PageSize),
 
@@ -68,6 +68,13 @@ namespace NetCoreWeb.Areas.Photo.Controllers
                 return View("List");//未匹配到，跳转列表页面。此处后期优化
             }
         }
+
+        public ViewResult Detail(string photoSrc)
+        {
+            return View((object)photoSrc);
+        }
+
+
         //[HttpPost]
         //public IActionResult Edit(Album album, IList<IFormFile> files)
         //{

@@ -1,68 +1,89 @@
-@model AlbumListViewModel
+﻿@model AlbumListViewModel
 @{
     ViewData["Title"] = "Index";
 }
 
-<div class="container">
-    <div class="row" id="post-list">
-        @foreach (var a in Model.Albums)
-        {
-            <div class="col-xs-12 col-sm-6">
-                <article class="post tag-chinese-website tag-bootstrap-v3">
-                    <h2 class="post-title">
-                        <a href="#">@a.Name</a>
-                    </h2>
-                    <div class="post-featured-image">
-                        <a class="thumbnail" asp-action="Album" asp-route-albumId="@a.AlbumID">
-                           @{
-                               string imgSrc = "http://image.youzhan.org/a/e1/e235a09426f32cc5b31a0a7ec3109.png!thumb";
-                               //string srcsetData = "";
-                               if (a.Lines != null && a.Lines.Count > 0)
-                               {
-                                   var pic = a.Lines.FirstOrDefault().Picture;
-                                   imgSrc = pic.GetRatePicName(640);
-
-                                   //srcsetData += pic.GetRateName("4x") + " 4x, ";
-                                   //srcsetData += pic.GetRateName("3x") + " 3x, ";
-                                   //srcsetData += pic.GetRateName("2x") + " 2x, ";
-                                   //srcsetData += pic.GetRateName("1x") + " 1x";
-
-                               }
-
-                            <img src="@imgSrc" width="700" height="438" alt="ShootByHui" onload="imgLoaded(this)">
-                        }
-                        </a>                        
-                    </div>
-                </article>
-            </div>
-          }
-
-
-
-        @*<div class="col-xs-12 col-sm-6">
-                <article class="post tag-chinese-website tag-bootstrap-v3">
-                    <h2 class="post-title">
-                        <a href="/circleci/" onclick="_hmt.push(['_trackEvent', 'titlelink', 'click', 'CircleCI'])" target="_blank">CircleCI</a>
-                    </h2>
-                    <div class="post-featured-image">
-                        <a class="thumbnail" href="/circleci/" onclick="_hmt.push(['_trackEvent', 'imagelink', 'click', 'CircleCI'])" target="_blank">
-                            <img src="http://image.youzhan.org/a/e1/e235a09426f32cc5b31a0a7ec3109.png!thumb" width="700" height="438" alt="CircleCI" onload="imgLoaded(this)">
-                        </a>
-                    </div>
-                    <div class="post-content">
-                        <p>
-                            <a href="https://circleci.com/">CircleCI</a>
-                        </p>
-                    </div>
-                </article>
-            </div>*@
-
+<div class="header" style="background-image: url(http://static.bootcss.com/expo/img/d/dd/2de797545de56274f03a5920eb3a1.jpg);">
+    <div class="logoimg">
+        <a href="http://expo.bootcss.com" title="SuperHui 摄影区"><img src="http://image.youzhan.org/e/35/22ccaf4c24ef690f7767e6a3ba5f0.png" alt="SuperHui 摄影区" width="78"></a>
     </div>
-    <nav page-model="@Model.PagingInfo"
-         page-action="List"
-         page-url-category="@Model.CurrentCategory"
-         page-pre-class="newer-posts"
-         page-next-class="older-posts"
-         class="pagination">
-    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="logotxt"><h1><a asp-action="list">SuperHui</a></h1></div>
+                <h2 class="site-name text-center">摄影区<span>www.zoupenghui.com</span></h2>
+            </div>
+        </div>
+    </div>
 </div>
+<main class="main container" role="main">
+    <div class="container">
+        <div class="row" id="post-list">
+            @foreach (var a in Model.Albums)
+            {
+                <div class="col-xs-12 col-sm-6">
+                    <article class="post tag-chinese-website tag-bootstrap-v3">
+                        <h2 class="post-title">
+                            <a href="#">@a.Name</a>
+                        </h2>
+                        <div class="post-featured-image">
+                            <a class="thumbnail" asp-action="Album" asp-route-albumId="@a.AlbumID">
+                                @{
+                                    string imgSrc = "http://image.youzhan.org/a/e1/e235a09426f32cc5b31a0a7ec3109.png!thumb";
+                                    //string srcsetData = "";
+                                    if (a.Lines != null && a.Lines.Count > 0)
+                                    {
+                                        var pic = a.Lines.FirstOrDefault().Picture;
+                                        imgSrc = pic.GetRatePicName(640);
+
+                                        //srcsetData += pic.GetRateName("4x") + " 4x, ";
+                                        //srcsetData += pic.GetRateName("3x") + " 3x, ";
+                                        //srcsetData += pic.GetRateName("2x") + " 2x, ";
+                                        //srcsetData += pic.GetRateName("1x") + " 1x";
+
+                                    }
+
+                                    <img src="@imgSrc" alt="ShootByHui" onload="imgLoaded(this)">
+                                }
+                            </a>
+                        </div>
+                    </article>
+                </div>
+                                    }
+
+
+
+            @*<div class="col-xs-12 col-sm-6">
+                    <article class="post tag-chinese-website tag-bootstrap-v3">
+                        <h2 class="post-title">
+                            <a href="/circleci/" onclick="_hmt.push(['_trackEvent', 'titlelink', 'click', 'CircleCI'])" target="_blank">CircleCI</a>
+                        </h2>
+                        <div class="post-featured-image">
+                            <a class="thumbnail" href="/circleci/" onclick="_hmt.push(['_trackEvent', 'imagelink', 'click', 'CircleCI'])" target="_blank">
+                                <img src="http://image.youzhan.org/a/e1/e235a09426f32cc5b31a0a7ec3109.png!thumb" width="700" height="438" alt="CircleCI" onload="imgLoaded(this)">
+                            </a>
+                        </div>
+                        <div class="post-content">
+                            <p>
+                                <a href="https://circleci.com/">CircleCI</a>
+                            </p>
+                        </div>
+                    </article>
+                </div>*@
+
+        </div>
+        <nav page-model="@Model.PagingInfo"
+             page-action="List"
+             page-url-category="@Model.CurrentCategory"
+             page-pre-class="newer-posts"
+             page-next-class="older-posts"
+             class="pagination">
+        </nav>
+    </div>
+</main>
+
+
+
+
+
+
