@@ -58,6 +58,7 @@
     <Folder Include="Areas\Test\Controllers\" />
     <Folder Include="Areas\Test\Models\" />
     <Folder Include="Areas\Test\Views\Html\" />
+    <Folder Include="Areas\Test\Views\Css\" />
     <Folder Include="Views\Pictures\" />
     <Folder Include="Areas\SportsStore\Views\Admin\" />
     <Folder Include="Views\Error\" />

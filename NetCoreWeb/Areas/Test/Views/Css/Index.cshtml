@@ -1,0 +1,51 @@
+
+@{
+    ViewData["Title"] = "Index";
+}
+<hr />
+<h1>word-spacing</h1>
+<style>
+    p.spread {
+        word-spacing: 30px;
+    }
+
+    p.tight {
+        word-spacing: -0.5em;
+    }
+
+</style>
+
+<p class="spread">
+    This is a paragraph. The spaces between words will be increased.
+</p>
+
+<p class="tight">
+    This is a paragraph. The spaces between words will be decreased.
+</p>
+
+
+
+<hr />   
+<h2>text-indent </h2>
+<style>
+    div#outer {
+        width: 500px;
+    }
+
+    div#inner {
+        text-indent: 10%;
+    }
+
+    p {
+        width: 200px;
+    }
+</style>
+
+
+<div id="outer" style="border:1px solid green">
+    <div id="inner">
+        some text. some text. some text.
+        <p>this is a paragragh.</p>
+    </div>
+</div>
+
