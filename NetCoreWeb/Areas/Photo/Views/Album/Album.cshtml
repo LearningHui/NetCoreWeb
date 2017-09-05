@@ -23,9 +23,11 @@
                     srcsetData += p.Picture.GetRateName("2x") + " 2x, ";
                     srcsetData += p.Picture.GetRateName("1x") + " 1x";
                 }*@
-                <img src="@p.Picture.GetRatePicName(640)" style="width:100%" alt="Albums" />
-            </a>
-            
+                <div style="position:relative;">
+                    <img src="@p.Picture.ThumbnailName" style="width:100%;display:block;" alt="Albums" />
+                    <img src="@p.Picture.GetRatePicName(640)" style="width:100%;display:block;position:absolute;top:0px;left:0px;" alt="Albums" />
+                </div>
+            </a>            
         </div>
     }
 </div>

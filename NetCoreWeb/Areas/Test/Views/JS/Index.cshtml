@@ -1,0 +1,15 @@
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+@{
+    for (int i = 0; i < 3; i++)
+    {        
+        <h1>@string.Format("hhh{0}",i)</h1>
+    }
+}
+<div style="border:1px solid red;width:50px;height:50px;margin-left:auto;margin-right:auto;" ></div>
+<script>
+    document.write(location.pathname);
+</script>
