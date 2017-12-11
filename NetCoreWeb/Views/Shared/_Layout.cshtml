@@ -141,7 +141,7 @@
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
         <script asp-src-include="lib/jquery-validation/**/jquery.validate.js"></script>
-        <script asp-src-include="lib/jquery-validation-unobtrusive/**/*.js"></script> 
+        <script asp-src-include="lib/jquery-validation-unobtrusive/**/*.js" asp-src-exclude="**.min.js"></script> 
     </environment>
     <environment names="Staging,Production">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"

@@ -395,5 +395,7 @@ namespace NetCoreWeb.Areas.Photo.Controllers
             }
             return View();
         }
+
+
     }
 }
